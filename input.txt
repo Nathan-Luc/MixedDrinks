@@ -1,0 +1,11 @@
+
+DRUNK (Jesse = 20) 
+THEN
+Nathan = 0
+SOBER
+Long = 0
+
+
+Jesse = 20
+
+CHUG Jesse = 5 UNTIL Jesse-1;
