@@ -15,5 +15,5 @@ run:
 	 ./compiler
 
 clean:
-	 find . -type f ! -name "*.g4" ! -name "makefile" ! -name "main.cpp" ! -name "*.txt" ! -name "*.jar" -delete
+	 find . -type f ! -name "*.g4" ! -name "makefile" ! -name "main.cpp" ! -name "*.txt" ! -name "*.jar" ! -name "*.git" -delete
 	 
