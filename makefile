@@ -11,6 +11,13 @@ syntax:
 
 display:
 	google-chrome output/MixedDrinks/index.html
+
+alias: 
+	alias chrome="/mnt/c/'Program Files (x86)'/Google/Chrome/Application/chrome.exe"
+
+window:
+	chrome 'output'/'MixedDrinks'/index.html
+	
 run: 
 	 ./compiler
 
