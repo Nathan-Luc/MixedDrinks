@@ -1,3 +1,7 @@
+ALIAS = /mnt/c/'Program Files (x86)'/Google/Chrome/Application/chrome.exe
+WEB = output/MixedDrinks/index.html
+
+
 all: antlr main.exe
 
 antlr: 
@@ -10,14 +14,11 @@ syntax:
 	java -jar rrd-antlr4-0.1.2.jar *.g4
 
 display:
-	google-chrome output/MixedDrinks/index.html
-
-alias: 
-	alias chrome="/mnt/c/'Program Files (x86)'/Google/Chrome/Application/chrome.exe"
+	google-chrome $(WEB)
 
 window:
-	chrome 'output'/'MixedDrinks'/index.html
-	
+	$(ALIAS) $(WEB)
+
 run: 
 	 ./compiler
 
