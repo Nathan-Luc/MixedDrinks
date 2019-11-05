@@ -13,16 +13,28 @@ class  MixedDrinksParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, CHUG = 4, UNTIL = 5, DRUNK = 6, THEN = 7, 
+<<<<<<< HEAD
     SOBER = 8, IDENTIFIER = 9, INTEGER = 10, MUL_OP = 11, DIV_OP = 12, ADD_OP = 13, 
     SUB_OP = 14, EQ_OP = 15, NE_OP = 16, LT_OP = 17, LE_OP = 18, GT_OP = 19, 
     GE_OP = 20, NEWLINE = 21, WS = 22
+=======
+    SOBER = 8, BEER = 9, SPRITS = 10, IDENTIFIER = 11, INTEGER = 12, MUL_OP = 13, 
+    DIV_OP = 14, ADD_OP = 15, SUB_OP = 16, EQ_OP = 17, NE_OP = 18, LT_OP = 19, 
+    LE_OP = 20, GT_OP = 21, GE_OP = 22, NEWLINE = 23, WS = 24
+>>>>>>> Added Variable Declaration
   };
 
   enum {
     RuleProg = 0, RuleStmt = 1, RuleIf_stmt = 2, RuleAssignment_stmt = 3, 
+<<<<<<< HEAD
     RuleChug_stmt = 4, RuleVar_stmt = 5, RuleStmt_list = 6, RuleExpr = 7, 
     RuleDrink = 8, RuleShots = 9, RuleMul_div_op = 10, RuleAdd_sub_op = 11, 
     RuleRel_op = 12
+=======
+    RuleDeclaration_stmt = 4, RuleDeclaration = 5, RuleChug_stmt = 6, RuleStmt_list = 7, 
+    RuleExpr = 8, RuleTypeID = 9, RuleDrink = 10, RuleShots = 11, RuleMul_div_op = 12, 
+    RuleAdd_sub_op = 13, RuleRel_op = 14
+>>>>>>> Added Variable Declaration
   };
 
   MixedDrinksParser(antlr4::TokenStream *input);
@@ -39,10 +51,19 @@ public:
   class StmtContext;
   class If_stmtContext;
   class Assignment_stmtContext;
+<<<<<<< HEAD
   class Chug_stmtContext;
   class Var_stmtContext;
   class Stmt_listContext;
   class ExprContext;
+=======
+  class Declaration_stmtContext;
+  class DeclarationContext;
+  class Chug_stmtContext;
+  class Stmt_listContext;
+  class ExprContext;
+  class TypeIDContext;
+>>>>>>> Added Variable Declaration
   class DrinkContext;
   class ShotsContext;
   class Mul_div_opContext;
@@ -76,20 +97,36 @@ public:
    
   };
 
+<<<<<<< HEAD
   class  IfStmtContext : public StmtContext {
   public:
     IfStmtContext(StmtContext *ctx);
 
     If_stmtContext *if_stmt();
+=======
+  class  DeclareStmtContext : public StmtContext {
+  public:
+    DeclareStmtContext(StmtContext *ctx);
+
+    Declaration_stmtContext *declaration_stmt();
+>>>>>>> Added Variable Declaration
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
   };
 
+<<<<<<< HEAD
   class  VarStmtContext : public StmtContext {
   public:
     VarStmtContext(StmtContext *ctx);
 
     Var_stmtContext *var_stmt();
+=======
+  class  IfStmtContext : public StmtContext {
+  public:
+    IfStmtContext(StmtContext *ctx);
+
+    If_stmtContext *if_stmt();
+>>>>>>> Added Variable Declaration
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
   };
@@ -147,6 +184,60 @@ public:
 
   Assignment_stmtContext* assignment_stmt();
 
+<<<<<<< HEAD
+  class  Chug_stmtContext : public antlr4::ParserRuleContext {
+  public:
+    Chug_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *CHUG();
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
+    antlr4::tree::TerminalNode *UNTIL();
+=======
+  class  Declaration_stmtContext : public antlr4::ParserRuleContext {
+  public:
+    Declaration_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    DeclarationContext *declaration();
+    antlr4::tree::TerminalNode *EQ_OP();
+    ExprContext *expr();
+>>>>>>> Added Variable Declaration
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+<<<<<<< HEAD
+  Chug_stmtContext* chug_stmt();
+
+  class  Var_stmtContext : public antlr4::ParserRuleContext {
+  public:
+    Var_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    DrinkContext *drink();
+    ShotsContext *shots();
+=======
+  Declaration_stmtContext* declaration_stmt();
+
+  class  DeclarationContext : public antlr4::ParserRuleContext {
+  public:
+    DeclarationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    TypeIDContext *typeID();
+    DrinkContext *drink();
+>>>>>>> Added Variable Declaration
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+<<<<<<< HEAD
+  Var_stmtContext* var_stmt();
+=======
+  DeclarationContext* declaration();
+
   class  Chug_stmtContext : public antlr4::ParserRuleContext {
   public:
     Chug_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -162,20 +253,7 @@ public:
   };
 
   Chug_stmtContext* chug_stmt();
-
-  class  Var_stmtContext : public antlr4::ParserRuleContext {
-  public:
-    Var_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    DrinkContext *drink();
-    ShotsContext *shots();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  Var_stmtContext* var_stmt();
+>>>>>>> Added Variable Declaration
 
   class  Stmt_listContext : public antlr4::ParserRuleContext {
   public:
@@ -266,6 +344,24 @@ public:
 
   ExprContext* expr();
   ExprContext* expr(int precedence);
+<<<<<<< HEAD
+=======
+  class  TypeIDContext : public antlr4::ParserRuleContext {
+  public:
+    TypeIDContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *IDENTIFIER();
+    antlr4::tree::TerminalNode *BEER();
+    antlr4::tree::TerminalNode *SPRITS();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  TypeIDContext* typeID();
+
+>>>>>>> Added Variable Declaration
   class  DrinkContext : public antlr4::ParserRuleContext {
   public:
     DrinkContext(antlr4::ParserRuleContext *parent, size_t invokingState);
