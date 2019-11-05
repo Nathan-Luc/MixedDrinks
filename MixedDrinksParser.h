@@ -19,9 +19,10 @@ public:
   };
 
   enum {
-    RuleProg = 0, RuleStmt = 1, RuleIf_stmt = 2, RuleChug_stmt = 3, RuleStmt_list = 4, 
-    RuleAssignment_stmt = 5, RuleExpr = 6, RuleDrink = 7, RuleShots = 8, 
-    RuleMul_div_op = 9, RuleAdd_sub_op = 10, RuleRel_op = 11
+    RuleProg = 0, RuleStmt = 1, RuleIf_stmt = 2, RuleAssignment_stmt = 3, 
+    RuleChug_stmt = 4, RuleVar_stmt = 5, RuleStmt_list = 6, RuleExpr = 7, 
+    RuleDrink = 8, RuleShots = 9, RuleMul_div_op = 10, RuleAdd_sub_op = 11, 
+    RuleRel_op = 12
   };
 
   MixedDrinksParser(antlr4::TokenStream *input);
@@ -37,9 +38,10 @@ public:
   class ProgContext;
   class StmtContext;
   class If_stmtContext;
-  class Chug_stmtContext;
-  class Stmt_listContext;
   class Assignment_stmtContext;
+  class Chug_stmtContext;
+  class Var_stmtContext;
+  class Stmt_listContext;
   class ExprContext;
   class DrinkContext;
   class ShotsContext;
@@ -83,6 +85,15 @@ public:
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
   };
 
+  class  VarStmtContext : public StmtContext {
+  public:
+    VarStmtContext(StmtContext *ctx);
+
+    Var_stmtContext *var_stmt();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+  };
+
   class  AssignmentStmtContext : public StmtContext {
   public:
     AssignmentStmtContext(StmtContext *ctx);
@@ -121,6 +132,21 @@ public:
 
   If_stmtContext* if_stmt();
 
+  class  Assignment_stmtContext : public antlr4::ParserRuleContext {
+  public:
+    Assignment_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    DrinkContext *drink();
+    antlr4::tree::TerminalNode *EQ_OP();
+    ExprContext *expr();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  Assignment_stmtContext* assignment_stmt();
+
   class  Chug_stmtContext : public antlr4::ParserRuleContext {
   public:
     Chug_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -137,6 +163,20 @@ public:
 
   Chug_stmtContext* chug_stmt();
 
+  class  Var_stmtContext : public antlr4::ParserRuleContext {
+  public:
+    Var_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    DrinkContext *drink();
+    ShotsContext *shots();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  Var_stmtContext* var_stmt();
+
   class  Stmt_listContext : public antlr4::ParserRuleContext {
   public:
     Stmt_listContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -150,21 +190,6 @@ public:
   };
 
   Stmt_listContext* stmt_list();
-
-  class  Assignment_stmtContext : public antlr4::ParserRuleContext {
-  public:
-    Assignment_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    DrinkContext *drink();
-    antlr4::tree::TerminalNode *EQ_OP();
-    ExprContext *expr();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  Assignment_stmtContext* assignment_stmt();
 
   class  ExprContext : public antlr4::ParserRuleContext {
   public:

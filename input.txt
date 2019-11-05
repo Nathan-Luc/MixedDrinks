@@ -1,3 +1,5 @@
+Jesse
+20
 
 DRUNK (Jesse = 20) 
 THEN
@@ -8,4 +10,4 @@ Long = 0
 
 Jesse = 20
 
-CHUG Jesse = 5 UNTIL Jesse-1;
+CHUG Jesse = Jesse - 1 UNTIL Jesse = 0;

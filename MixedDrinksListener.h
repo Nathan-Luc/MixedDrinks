@@ -26,17 +26,23 @@ public:
   virtual void enterRepeatStmt(MixedDrinksParser::RepeatStmtContext *ctx) = 0;
   virtual void exitRepeatStmt(MixedDrinksParser::RepeatStmtContext *ctx) = 0;
 
+  virtual void enterVarStmt(MixedDrinksParser::VarStmtContext *ctx) = 0;
+  virtual void exitVarStmt(MixedDrinksParser::VarStmtContext *ctx) = 0;
+
   virtual void enterIf_stmt(MixedDrinksParser::If_stmtContext *ctx) = 0;
   virtual void exitIf_stmt(MixedDrinksParser::If_stmtContext *ctx) = 0;
+
+  virtual void enterAssignment_stmt(MixedDrinksParser::Assignment_stmtContext *ctx) = 0;
+  virtual void exitAssignment_stmt(MixedDrinksParser::Assignment_stmtContext *ctx) = 0;
 
   virtual void enterChug_stmt(MixedDrinksParser::Chug_stmtContext *ctx) = 0;
   virtual void exitChug_stmt(MixedDrinksParser::Chug_stmtContext *ctx) = 0;
 
+  virtual void enterVar_stmt(MixedDrinksParser::Var_stmtContext *ctx) = 0;
+  virtual void exitVar_stmt(MixedDrinksParser::Var_stmtContext *ctx) = 0;
+
   virtual void enterStmt_list(MixedDrinksParser::Stmt_listContext *ctx) = 0;
   virtual void exitStmt_list(MixedDrinksParser::Stmt_listContext *ctx) = 0;
-
-  virtual void enterAssignment_stmt(MixedDrinksParser::Assignment_stmtContext *ctx) = 0;
-  virtual void exitAssignment_stmt(MixedDrinksParser::Assignment_stmtContext *ctx) = 0;
 
   virtual void enterIdentifier(MixedDrinksParser::IdentifierContext *ctx) = 0;
   virtual void exitIdentifier(MixedDrinksParser::IdentifierContext *ctx) = 0;

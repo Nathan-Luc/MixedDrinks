@@ -28,17 +28,23 @@ public:
   virtual void enterRepeatStmt(MixedDrinksParser::RepeatStmtContext * /*ctx*/) override { }
   virtual void exitRepeatStmt(MixedDrinksParser::RepeatStmtContext * /*ctx*/) override { }
 
+  virtual void enterVarStmt(MixedDrinksParser::VarStmtContext * /*ctx*/) override { }
+  virtual void exitVarStmt(MixedDrinksParser::VarStmtContext * /*ctx*/) override { }
+
   virtual void enterIf_stmt(MixedDrinksParser::If_stmtContext * /*ctx*/) override { }
   virtual void exitIf_stmt(MixedDrinksParser::If_stmtContext * /*ctx*/) override { }
+
+  virtual void enterAssignment_stmt(MixedDrinksParser::Assignment_stmtContext * /*ctx*/) override { }
+  virtual void exitAssignment_stmt(MixedDrinksParser::Assignment_stmtContext * /*ctx*/) override { }
 
   virtual void enterChug_stmt(MixedDrinksParser::Chug_stmtContext * /*ctx*/) override { }
   virtual void exitChug_stmt(MixedDrinksParser::Chug_stmtContext * /*ctx*/) override { }
 
+  virtual void enterVar_stmt(MixedDrinksParser::Var_stmtContext * /*ctx*/) override { }
+  virtual void exitVar_stmt(MixedDrinksParser::Var_stmtContext * /*ctx*/) override { }
+
   virtual void enterStmt_list(MixedDrinksParser::Stmt_listContext * /*ctx*/) override { }
   virtual void exitStmt_list(MixedDrinksParser::Stmt_listContext * /*ctx*/) override { }
-
-  virtual void enterAssignment_stmt(MixedDrinksParser::Assignment_stmtContext * /*ctx*/) override { }
-  virtual void exitAssignment_stmt(MixedDrinksParser::Assignment_stmtContext * /*ctx*/) override { }
 
   virtual void enterIdentifier(MixedDrinksParser::IdentifierContext * /*ctx*/) override { }
   virtual void exitIdentifier(MixedDrinksParser::IdentifierContext * /*ctx*/) override { }
