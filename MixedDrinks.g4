@@ -5,13 +5,14 @@ prog:   stmt+ ;
 stmt: 		if_stmt			#ifStmt
 	|	assignment_stmt 	#assignmentStmt
 	| 	chug_stmt    		#repeatStmt
-	|	var_stmt		#varStmt
+	|	declaration_stmt	#declareStmt
 	;
 
 if_stmt         	: DRUNK '(' expr ')' THEN stmt (SOBER stmt )? ;
 assignment_stmt 	: drink '=' expr ;
+declaration_stmt	: declaration '=' expr;
+declaration	:typeID drink;
 chug_stmt     		: CHUG expr UNTIL expr;
-var_stmt		: drink | shots;
 
 stmt_list       : stmt ( ';' stmt )*;
 
@@ -23,6 +24,11 @@ expr:		expr mul_div_op expr	# mulDivExpr
 	|	shots				# integer
 	| 	'(' expr ')'         	# parens
 	;
+
+typeID :IDENTIFIER
+	   | BEER
+	   | SPRITS
+	   ; 
 
 drink : IDENTIFIER ;  
 shots : INTEGER ;
@@ -36,6 +42,8 @@ UNTIL   : 'UNTIL' ;
 DRUNK   : 'DRUNK' ;
 THEN    : 'THEN' ;
 SOBER    : 'SOBER';
+BEER	:  'BEER' ;
+SPRITS	: 'SPRITS';
 
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9]* ;
 INTEGER    : [0-9]+ ;

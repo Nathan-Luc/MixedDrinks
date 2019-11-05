@@ -1,5 +1,8 @@
-Jesse
-20
+
+Beer Nathan = 2
+Sprits Long = 0
+
+Jesse = 20
 
 DRUNK (Jesse = 20) 
 THEN
