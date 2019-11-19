@@ -13,15 +13,9 @@ class  MixedDrinksLexer : public antlr4::Lexer {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, CHUG = 4, UNTIL = 5, DRUNK = 6, THEN = 7, 
-<<<<<<< HEAD
-    SOBER = 8, IDENTIFIER = 9, INTEGER = 10, MUL_OP = 11, DIV_OP = 12, ADD_OP = 13, 
-    SUB_OP = 14, EQ_OP = 15, NE_OP = 16, LT_OP = 17, LE_OP = 18, GT_OP = 19, 
-    GE_OP = 20, NEWLINE = 21, WS = 22
-=======
     SOBER = 8, BEER = 9, SPRITS = 10, IDENTIFIER = 11, INTEGER = 12, MUL_OP = 13, 
     DIV_OP = 14, ADD_OP = 15, SUB_OP = 16, EQ_OP = 17, NE_OP = 18, LT_OP = 19, 
     LE_OP = 20, GT_OP = 21, GE_OP = 22, NEWLINE = 23, WS = 24
->>>>>>> Added Variable Declaration
   };
 
   MixedDrinksLexer(antlr4::CharStream *input);

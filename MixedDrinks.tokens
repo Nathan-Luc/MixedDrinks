@@ -6,22 +6,6 @@ UNTIL=5
 DRUNK=6
 THEN=7
 SOBER=8
-<<<<<<< HEAD
-IDENTIFIER=9
-INTEGER=10
-MUL_OP=11
-DIV_OP=12
-ADD_OP=13
-SUB_OP=14
-EQ_OP=15
-NE_OP=16
-LT_OP=17
-LE_OP=18
-GT_OP=19
-GE_OP=20
-NEWLINE=21
-WS=22
-=======
 BEER=9
 SPRITS=10
 IDENTIFIER=11
@@ -38,7 +22,6 @@ GT_OP=21
 GE_OP=22
 NEWLINE=23
 WS=24
->>>>>>> Added Variable Declaration
 '('=1
 ')'=2
 ';'=3
@@ -47,18 +30,6 @@ WS=24
 'DRUNK'=6
 'THEN'=7
 'SOBER'=8
-<<<<<<< HEAD
-'*'=11
-'/'=12
-'+'=13
-'-'=14
-'='=15
-'<>'=16
-'<'=17
-'<='=18
-'>'=19
-'>='=20
-=======
 'BEER'=9
 'SPRITS'=10
 '*'=13
@@ -71,4 +42,3 @@ WS=24
 '<='=20
 '>'=21
 '>='=22
->>>>>>> Added Variable Declaration
