@@ -1,5 +1,10 @@
 grammar MixedDrinks;
 
+@header {
+#include "wci/intermediate/TypeSpec.h"
+using namespace wci::intermediate;
+}
+
 prog:   stmt+ ; 
 
 stmt: 		if_stmt			#ifStmt

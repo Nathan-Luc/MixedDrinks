@@ -1,8 +1,11 @@
 
+#include "wci/intermediate/TypeSpec.h"
+using namespace wci::intermediate;
+
+
 // Generated from MixedDrinks.g4 by ANTLR 4.7.2
 
 
-#include "MixedDrinksListener.h"
 #include "MixedDrinksVisitor.h"
 
 #include "MixedDrinksParser.h"
@@ -50,19 +53,6 @@ MixedDrinksParser::StmtContext* MixedDrinksParser::ProgContext::stmt(size_t i) {
 size_t MixedDrinksParser::ProgContext::getRuleIndex() const {
   return MixedDrinksParser::RuleProg;
 }
-
-void MixedDrinksParser::ProgContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterProg(this);
-}
-
-void MixedDrinksParser::ProgContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitProg(this);
-}
-
 
 antlrcpp::Any MixedDrinksParser::ProgContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -130,17 +120,6 @@ MixedDrinksParser::Declaration_stmtContext* MixedDrinksParser::DeclareStmtContex
 
 MixedDrinksParser::DeclareStmtContext::DeclareStmtContext(StmtContext *ctx) { copyFrom(ctx); }
 
-void MixedDrinksParser::DeclareStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDeclareStmt(this);
-}
-void MixedDrinksParser::DeclareStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDeclareStmt(this);
-}
-
 antlrcpp::Any MixedDrinksParser::DeclareStmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitDeclareStmt(this);
@@ -154,17 +133,6 @@ MixedDrinksParser::If_stmtContext* MixedDrinksParser::IfStmtContext::if_stmt() {
 }
 
 MixedDrinksParser::IfStmtContext::IfStmtContext(StmtContext *ctx) { copyFrom(ctx); }
-
-void MixedDrinksParser::IfStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIfStmt(this);
-}
-void MixedDrinksParser::IfStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIfStmt(this);
-}
 
 antlrcpp::Any MixedDrinksParser::IfStmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -180,17 +148,6 @@ MixedDrinksParser::Assignment_stmtContext* MixedDrinksParser::AssignmentStmtCont
 
 MixedDrinksParser::AssignmentStmtContext::AssignmentStmtContext(StmtContext *ctx) { copyFrom(ctx); }
 
-void MixedDrinksParser::AssignmentStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAssignmentStmt(this);
-}
-void MixedDrinksParser::AssignmentStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAssignmentStmt(this);
-}
-
 antlrcpp::Any MixedDrinksParser::AssignmentStmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitAssignmentStmt(this);
@@ -204,17 +161,6 @@ MixedDrinksParser::Chug_stmtContext* MixedDrinksParser::RepeatStmtContext::chug_
 }
 
 MixedDrinksParser::RepeatStmtContext::RepeatStmtContext(StmtContext *ctx) { copyFrom(ctx); }
-
-void MixedDrinksParser::RepeatStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRepeatStmt(this);
-}
-void MixedDrinksParser::RepeatStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRepeatStmt(this);
-}
 
 antlrcpp::Any MixedDrinksParser::RepeatStmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -312,19 +258,6 @@ size_t MixedDrinksParser::If_stmtContext::getRuleIndex() const {
   return MixedDrinksParser::RuleIf_stmt;
 }
 
-void MixedDrinksParser::If_stmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIf_stmt(this);
-}
-
-void MixedDrinksParser::If_stmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIf_stmt(this);
-}
-
-
 antlrcpp::Any MixedDrinksParser::If_stmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitIf_stmt(this);
@@ -400,19 +333,6 @@ size_t MixedDrinksParser::Assignment_stmtContext::getRuleIndex() const {
   return MixedDrinksParser::RuleAssignment_stmt;
 }
 
-void MixedDrinksParser::Assignment_stmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAssignment_stmt(this);
-}
-
-void MixedDrinksParser::Assignment_stmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAssignment_stmt(this);
-}
-
-
 antlrcpp::Any MixedDrinksParser::Assignment_stmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitAssignment_stmt(this);
@@ -469,19 +389,6 @@ size_t MixedDrinksParser::Declaration_stmtContext::getRuleIndex() const {
   return MixedDrinksParser::RuleDeclaration_stmt;
 }
 
-void MixedDrinksParser::Declaration_stmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDeclaration_stmt(this);
-}
-
-void MixedDrinksParser::Declaration_stmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDeclaration_stmt(this);
-}
-
-
 antlrcpp::Any MixedDrinksParser::Declaration_stmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitDeclaration_stmt(this);
@@ -533,19 +440,6 @@ MixedDrinksParser::DrinkContext* MixedDrinksParser::DeclarationContext::drink() 
 size_t MixedDrinksParser::DeclarationContext::getRuleIndex() const {
   return MixedDrinksParser::RuleDeclaration;
 }
-
-void MixedDrinksParser::DeclarationContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDeclaration(this);
-}
-
-void MixedDrinksParser::DeclarationContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDeclaration(this);
-}
-
 
 antlrcpp::Any MixedDrinksParser::DeclarationContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -605,19 +499,6 @@ size_t MixedDrinksParser::Chug_stmtContext::getRuleIndex() const {
   return MixedDrinksParser::RuleChug_stmt;
 }
 
-void MixedDrinksParser::Chug_stmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterChug_stmt(this);
-}
-
-void MixedDrinksParser::Chug_stmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitChug_stmt(this);
-}
-
-
 antlrcpp::Any MixedDrinksParser::Chug_stmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitChug_stmt(this);
@@ -671,19 +552,6 @@ MixedDrinksParser::StmtContext* MixedDrinksParser::Stmt_listContext::stmt(size_t
 size_t MixedDrinksParser::Stmt_listContext::getRuleIndex() const {
   return MixedDrinksParser::RuleStmt_list;
 }
-
-void MixedDrinksParser::Stmt_listContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterStmt_list(this);
-}
-
-void MixedDrinksParser::Stmt_listContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitStmt_list(this);
-}
-
 
 antlrcpp::Any MixedDrinksParser::Stmt_listContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -750,17 +618,6 @@ MixedDrinksParser::DrinkContext* MixedDrinksParser::IdentifierContext::drink() {
 
 MixedDrinksParser::IdentifierContext::IdentifierContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void MixedDrinksParser::IdentifierContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIdentifier(this);
-}
-void MixedDrinksParser::IdentifierContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIdentifier(this);
-}
-
 antlrcpp::Any MixedDrinksParser::IdentifierContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitIdentifier(this);
@@ -774,17 +631,6 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::ParensContext::expr() {
 }
 
 MixedDrinksParser::ParensContext::ParensContext(ExprContext *ctx) { copyFrom(ctx); }
-
-void MixedDrinksParser::ParensContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterParens(this);
-}
-void MixedDrinksParser::ParensContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitParens(this);
-}
 
 antlrcpp::Any MixedDrinksParser::ParensContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -808,17 +654,6 @@ MixedDrinksParser::Add_sub_opContext* MixedDrinksParser::AddSubExprContext::add_
 
 MixedDrinksParser::AddSubExprContext::AddSubExprContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void MixedDrinksParser::AddSubExprContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAddSubExpr(this);
-}
-void MixedDrinksParser::AddSubExprContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAddSubExpr(this);
-}
-
 antlrcpp::Any MixedDrinksParser::AddSubExprContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitAddSubExpr(this);
@@ -832,17 +667,6 @@ MixedDrinksParser::ShotsContext* MixedDrinksParser::IntegerContext::shots() {
 }
 
 MixedDrinksParser::IntegerContext::IntegerContext(ExprContext *ctx) { copyFrom(ctx); }
-
-void MixedDrinksParser::IntegerContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterInteger(this);
-}
-void MixedDrinksParser::IntegerContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitInteger(this);
-}
 
 antlrcpp::Any MixedDrinksParser::IntegerContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -866,17 +690,6 @@ MixedDrinksParser::Rel_opContext* MixedDrinksParser::RelExprContext::rel_op() {
 
 MixedDrinksParser::RelExprContext::RelExprContext(ExprContext *ctx) { copyFrom(ctx); }
 
-void MixedDrinksParser::RelExprContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRelExpr(this);
-}
-void MixedDrinksParser::RelExprContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRelExpr(this);
-}
-
 antlrcpp::Any MixedDrinksParser::RelExprContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitRelExpr(this);
@@ -898,17 +711,6 @@ MixedDrinksParser::Mul_div_opContext* MixedDrinksParser::MulDivExprContext::mul_
 }
 
 MixedDrinksParser::MulDivExprContext::MulDivExprContext(ExprContext *ctx) { copyFrom(ctx); }
-
-void MixedDrinksParser::MulDivExprContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterMulDivExpr(this);
-}
-void MixedDrinksParser::MulDivExprContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitMulDivExpr(this);
-}
 
 antlrcpp::Any MixedDrinksParser::MulDivExprContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -1068,19 +870,6 @@ size_t MixedDrinksParser::TypeIDContext::getRuleIndex() const {
   return MixedDrinksParser::RuleTypeID;
 }
 
-void MixedDrinksParser::TypeIDContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterTypeID(this);
-}
-
-void MixedDrinksParser::TypeIDContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitTypeID(this);
-}
-
-
 antlrcpp::Any MixedDrinksParser::TypeIDContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitTypeID(this);
@@ -1136,19 +925,6 @@ size_t MixedDrinksParser::DrinkContext::getRuleIndex() const {
   return MixedDrinksParser::RuleDrink;
 }
 
-void MixedDrinksParser::DrinkContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDrink(this);
-}
-
-void MixedDrinksParser::DrinkContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDrink(this);
-}
-
-
 antlrcpp::Any MixedDrinksParser::DrinkContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
     return parserVisitor->visitDrink(this);
@@ -1192,19 +968,6 @@ tree::TerminalNode* MixedDrinksParser::ShotsContext::INTEGER() {
 size_t MixedDrinksParser::ShotsContext::getRuleIndex() const {
   return MixedDrinksParser::RuleShots;
 }
-
-void MixedDrinksParser::ShotsContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterShots(this);
-}
-
-void MixedDrinksParser::ShotsContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitShots(this);
-}
-
 
 antlrcpp::Any MixedDrinksParser::ShotsContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -1253,19 +1016,6 @@ tree::TerminalNode* MixedDrinksParser::Mul_div_opContext::DIV_OP() {
 size_t MixedDrinksParser::Mul_div_opContext::getRuleIndex() const {
   return MixedDrinksParser::RuleMul_div_op;
 }
-
-void MixedDrinksParser::Mul_div_opContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterMul_div_op(this);
-}
-
-void MixedDrinksParser::Mul_div_opContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitMul_div_op(this);
-}
-
 
 antlrcpp::Any MixedDrinksParser::Mul_div_opContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -1324,19 +1074,6 @@ tree::TerminalNode* MixedDrinksParser::Add_sub_opContext::SUB_OP() {
 size_t MixedDrinksParser::Add_sub_opContext::getRuleIndex() const {
   return MixedDrinksParser::RuleAdd_sub_op;
 }
-
-void MixedDrinksParser::Add_sub_opContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAdd_sub_op(this);
-}
-
-void MixedDrinksParser::Add_sub_opContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAdd_sub_op(this);
-}
-
 
 antlrcpp::Any MixedDrinksParser::Add_sub_opContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
@@ -1411,19 +1148,6 @@ tree::TerminalNode* MixedDrinksParser::Rel_opContext::GE_OP() {
 size_t MixedDrinksParser::Rel_opContext::getRuleIndex() const {
   return MixedDrinksParser::RuleRel_op;
 }
-
-void MixedDrinksParser::Rel_opContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRel_op(this);
-}
-
-void MixedDrinksParser::Rel_opContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<MixedDrinksListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRel_op(this);
-}
-
 
 antlrcpp::Any MixedDrinksParser::Rel_opContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))

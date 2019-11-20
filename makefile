@@ -6,7 +6,7 @@ NOT = ! -name
 all: antlr main.exe
 
 antlr: 
-	antlr4 -visitor -Dlanguage="Cpp" *.g4
+	antlr4 -visitor -no-listener -Dlanguage="Cpp" *.g4
 
 main.exe:
 	g++ *.cpp -o compiler -std=c++0x -I/usr/local/include/antlr4-runtime -L/usr/local/lib -lantlr4-runtime
