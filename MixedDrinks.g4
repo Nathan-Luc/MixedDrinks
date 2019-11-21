@@ -22,7 +22,8 @@ chug_stmt     		: CHUG expr UNTIL expr;
 stmt_list       : stmt ( ';' stmt )*;
 
 
-expr:		expr mul_div_op expr	# mulDivExpr
+expr locals [ TypeSpec *type = nullptr ]
+	:		expr mul_div_op expr	# mulDivExpr
 	|	expr add_sub_op expr	# addSubExpr
 	| 	expr rel_op expr     	# relExpr
 	|	drink				# identifier

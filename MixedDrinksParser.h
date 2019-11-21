@@ -203,6 +203,7 @@ public:
 
   class  ExprContext : public antlr4::ParserRuleContext {
   public:
+    TypeSpec * type = nullptr;
     ExprContext(antlr4::ParserRuleContext *parent, size_t invokingState);
    
     ExprContext() = default;

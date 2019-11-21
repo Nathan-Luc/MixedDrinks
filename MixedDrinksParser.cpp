@@ -608,6 +608,7 @@ size_t MixedDrinksParser::ExprContext::getRuleIndex() const {
 
 void MixedDrinksParser::ExprContext::copyFrom(ExprContext *ctx) {
   ParserRuleContext::copyFrom(ctx);
+  this->type = ctx->type;
 }
 
 //----------------- IdentifierContext ------------------------------------------------------------------
