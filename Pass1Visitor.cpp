@@ -23,7 +23,6 @@ static string func_id = "";
 Pass1Visitor::Pass1Visitor()
     : program_id(nullptr), j_file(nullptr)
 {
-	cout << "--> Calling Pass1Visitor Constructor: starting symtab_stack." << endl;
 
 	// Create and initialize the symbol table stack.
     symtab_stack = SymTabFactory::create_symtab_stack();
@@ -36,7 +35,7 @@ ostream& Pass1Visitor::get_assembly_file() { return j_file; }
 
 antlrcpp::Any Pass1Visitor::visitProg(MixedDrinksParser::ProgContext *ctx)
 {
-    string program_name = "Munchies";
+    string program_name = "MixedDrinks";
     cout << "--> In " << program_name << endl;
 
     program_id = symtab_stack->enter_local(program_name);
@@ -128,19 +127,15 @@ antlrcpp::Any Pass1Visitor::visitDeclaration(MixedDrinksParser::DeclarationConte
     }
 
     string variable_name = func_id + ctx->variable_ID()->getText();
-    int x = 10;
     SymTabEntry *variable_id = symtab_stack->enter_local(variable_name);
     variable_id->set_definition((Definition) DF_VARIABLE);
     variable_id->set_typespec(type);
-    x = x^5;
-    cout << "I calculated x for you! Here: " << x << endl;
     j_file << ".field private static "<< variable_name << " " << type_indicator << endl;
     return visitChildren(ctx);
 }
 
 antlrcpp::Any Pass1Visitor::visitDeclaration_stmt(MixedDrinksParser::Declaration_stmtContext *ctx)
 {
-	cout << "Hello World, testing!" << endl;	// Testing output
 	return visitChildren(ctx);
 }
 

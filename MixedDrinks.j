@@ -1,4 +1,4 @@
-.class public Munchies
+.class public MixedDrinks
 .super java/lang/Object
 
 .field private static _runTimer LRunTimer;
