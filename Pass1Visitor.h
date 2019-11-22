@@ -27,27 +27,20 @@ public:
     virtual ~Pass1Visitor();
 
     ostream& get_assembly_file();
-
-    antlrcpp::Any visitProgram(munchiesParser::ProgramContext *ctx) override;
-    antlrcpp::Any visitBlock(munchiesParser::BlockContext *ctx) override;
-    antlrcpp::Any visitDeclaration(munchiesParser::DeclarationContext *ctx) override;
-    antlrcpp::Any visitDeclare_stmt(munchiesParser::Declare_stmtContext *ctx) override;
-    antlrcpp::Any visitTypeID(munchiesParser::TypeIDContext *ctx) override;
-    antlrcpp::Any visitAddSubExpr(munchiesParser::AddSubExprContext *ctx) override;
-    antlrcpp::Any visitMulDivExpr(munchiesParser::MulDivExprContext *ctx) override;
-    antlrcpp::Any visitVarID(munchiesParser::VarIDContext *ctx) override;
-    antlrcpp::Any visitParenExpr(munchiesParser::ParenExprContext *ctx) override;
-    antlrcpp::Any visitVariableExpr(munchiesParser::VariableExprContext *ctx) override;
-    antlrcpp::Any visitSignedNumber(munchiesParser::SignedNumberContext *ctx) override;
-    antlrcpp::Any visitUnsignedNumberExpr(munchiesParser::UnsignedNumberExprContext *ctx) override;
-    antlrcpp::Any visitCharConst(munchiesParser::CharConstContext *ctx) override;
-    antlrcpp::Any visitRelOpExpr(munchiesParser::RelOpExprContext *ctx) override;
-    antlrcpp::Any visitIntegerConst(munchiesParser::IntegerConstContext *ctx) override;
-    
-    // Added override functions to support function calls in Munchies
-    antlrcpp::Any visitFn_defn(munchiesParser::Fn_defnContext *ctx) override;
-    antlrcpp::Any visitFuncID(munchiesParser::FuncIDContext *ctx) override;
-    antlrcpp::Any visitFuncCallExpr(munchiesParser::FuncCallExprContext *ctx) override;
+	antlrcpp::Any visitProg(MixedDrinksParser::ProgContext *ctx) override;
+	antlrcpp::Any visitBlock(MixedDrinksParser::BlockContext *ctx) override;
+	antlrcpp::Any visitDeclaration_stmt(MixedDrinksParser::Declaration_stmtContext *ctx) override;
+	antlrcpp::Any visitDeclaration(MixedDrinksParser::DeclarationContext *ctx) override;
+	antlrcpp::Any visitTypeID(MixedDrinksParser::TypeIDContext *ctx) override;
+	antlrcpp::Any visitAddSubExpr(MixedDrinksParser::AddSubExprContext *ctx) override;
+	antlrcpp::Any visitMulDivExpr(MixedDrinksParser::MulDivExprContext *ctx) override;
+	antlrcpp::Any visitVariable_ID(MixedDrinksParser::Variable_IDContext *ctx) override;
+	antlrcpp::Any visitParens(MixedDrinksParser::ParensContext *ctx) override;
+	antlrcpp::Any visitDrinkExpression(MixedDrinksParser::DrinkExpressionContext *ctx) override;
+	antlrcpp::Any visitNumberExpression(MixedDrinksParser::NumberExpressionContext *ctx) override;
+	antlrcpp::Any visitCharacter_constant(MixedDrinksParser::Character_constantContext *ctx) override;
+	antlrcpp::Any visitRelExpr(MixedDrinksParser::RelExprContext *ctx) override;
+	antlrcpp::Any visitInteger_constant(MixedDrinksParser::Integer_constantContext *ctx) override;
 };
 
 #endif /* PASS1VISITOR_H_ */

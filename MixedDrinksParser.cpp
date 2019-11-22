@@ -41,12 +41,16 @@ MixedDrinksParser::ProgContext::ProgContext(ParserRuleContext *parent, size_t in
   : ParserRuleContext(parent, invokingState) {
 }
 
-std::vector<MixedDrinksParser::StmtContext *> MixedDrinksParser::ProgContext::stmt() {
-  return getRuleContexts<MixedDrinksParser::StmtContext>();
+MixedDrinksParser::MainContext* MixedDrinksParser::ProgContext::main() {
+  return getRuleContext<MixedDrinksParser::MainContext>(0);
 }
 
-MixedDrinksParser::StmtContext* MixedDrinksParser::ProgContext::stmt(size_t i) {
-  return getRuleContext<MixedDrinksParser::StmtContext>(i);
+MixedDrinksParser::BlockContext* MixedDrinksParser::ProgContext::block() {
+  return getRuleContext<MixedDrinksParser::BlockContext>(0);
+}
+
+tree::TerminalNode* MixedDrinksParser::ProgContext::END() {
+  return getToken(MixedDrinksParser::END, 0);
 }
 
 
@@ -64,6 +68,70 @@ antlrcpp::Any MixedDrinksParser::ProgContext::accept(tree::ParseTreeVisitor *vis
 MixedDrinksParser::ProgContext* MixedDrinksParser::prog() {
   ProgContext *_localctx = _tracker.createInstance<ProgContext>(_ctx, getState());
   enterRule(_localctx, 0, MixedDrinksParser::RuleProg);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(44);
+    main();
+    setState(45);
+    block();
+    setState(46);
+    match(MixedDrinksParser::END);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- MainContext ------------------------------------------------------------------
+
+MixedDrinksParser::MainContext::MainContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+std::vector<MixedDrinksParser::TypeIDContext *> MixedDrinksParser::MainContext::typeID() {
+  return getRuleContexts<MixedDrinksParser::TypeIDContext>();
+}
+
+MixedDrinksParser::TypeIDContext* MixedDrinksParser::MainContext::typeID(size_t i) {
+  return getRuleContext<MixedDrinksParser::TypeIDContext>(i);
+}
+
+tree::TerminalNode* MixedDrinksParser::MainContext::MIXED_DRINKS() {
+  return getToken(MixedDrinksParser::MIXED_DRINKS, 0);
+}
+
+std::vector<tree::TerminalNode *> MixedDrinksParser::MainContext::IDENTIFIER() {
+  return getTokens(MixedDrinksParser::IDENTIFIER);
+}
+
+tree::TerminalNode* MixedDrinksParser::MainContext::IDENTIFIER(size_t i) {
+  return getToken(MixedDrinksParser::IDENTIFIER, i);
+}
+
+
+size_t MixedDrinksParser::MainContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleMain;
+}
+
+antlrcpp::Any MixedDrinksParser::MainContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitMain(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+MixedDrinksParser::MainContext* MixedDrinksParser::main() {
+  MainContext *_localctx = _tracker.createInstance<MainContext>(_ctx, getState());
+  enterRule(_localctx, 2, MixedDrinksParser::RuleMain);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -71,21 +139,81 @@ MixedDrinksParser::ProgContext* MixedDrinksParser::prog() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(31); 
+    setState(48);
+    typeID();
+    setState(49);
+    match(MixedDrinksParser::MIXED_DRINKS);
+    setState(50);
+    match(MixedDrinksParser::T__0);
+    setState(59);
     _errHandler->sync(this);
     _la = _input->LA(1);
-    do {
-      setState(30);
-      stmt();
-      setState(33); 
+    while ((((_la & ~ 0x3fULL) == 0) &&
+      ((1ULL << _la) & ((1ULL << MixedDrinksParser::IDENTIFIER)
+      | (1ULL << MixedDrinksParser::INTEGER)
+      | (1ULL << MixedDrinksParser::CHARACTER))) != 0)) {
+      setState(51);
+      typeID();
+      setState(52);
+      match(MixedDrinksParser::IDENTIFIER);
+      setState(55);
+      _errHandler->sync(this);
+
+      _la = _input->LA(1);
+      if (_la == MixedDrinksParser::T__1) {
+        setState(54);
+        match(MixedDrinksParser::T__1);
+      }
+      setState(61);
       _errHandler->sync(this);
       _la = _input->LA(1);
-    } while ((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & ((1ULL << MixedDrinksParser::CHUG)
-      | (1ULL << MixedDrinksParser::DRUNK)
-      | (1ULL << MixedDrinksParser::BEER)
-      | (1ULL << MixedDrinksParser::SPRITS)
-      | (1ULL << MixedDrinksParser::IDENTIFIER))) != 0));
+    }
+    setState(62);
+    match(MixedDrinksParser::T__2);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- BlockContext ------------------------------------------------------------------
+
+MixedDrinksParser::BlockContext::BlockContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+MixedDrinksParser::Statement_listContext* MixedDrinksParser::BlockContext::statement_list() {
+  return getRuleContext<MixedDrinksParser::Statement_listContext>(0);
+}
+
+
+size_t MixedDrinksParser::BlockContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleBlock;
+}
+
+antlrcpp::Any MixedDrinksParser::BlockContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitBlock(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+MixedDrinksParser::BlockContext* MixedDrinksParser::block() {
+  BlockContext *_localctx = _tracker.createInstance<BlockContext>(_ctx, getState());
+  enterRule(_localctx, 4, MixedDrinksParser::RuleBlock);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(64);
+    statement_list();
    
   }
   catch (RecognitionException &e) {
@@ -103,111 +231,81 @@ MixedDrinksParser::StmtContext::StmtContext(ParserRuleContext *parent, size_t in
   : ParserRuleContext(parent, invokingState) {
 }
 
+MixedDrinksParser::If_stmtContext* MixedDrinksParser::StmtContext::if_stmt() {
+  return getRuleContext<MixedDrinksParser::If_stmtContext>(0);
+}
+
+MixedDrinksParser::Assignment_stmtContext* MixedDrinksParser::StmtContext::assignment_stmt() {
+  return getRuleContext<MixedDrinksParser::Assignment_stmtContext>(0);
+}
+
+MixedDrinksParser::Repeat_statementContext* MixedDrinksParser::StmtContext::repeat_statement() {
+  return getRuleContext<MixedDrinksParser::Repeat_statementContext>(0);
+}
+
+MixedDrinksParser::Declaration_stmtContext* MixedDrinksParser::StmtContext::declaration_stmt() {
+  return getRuleContext<MixedDrinksParser::Declaration_stmtContext>(0);
+}
+
+MixedDrinksParser::Print_statementContext* MixedDrinksParser::StmtContext::print_statement() {
+  return getRuleContext<MixedDrinksParser::Print_statementContext>(0);
+}
+
 
 size_t MixedDrinksParser::StmtContext::getRuleIndex() const {
   return MixedDrinksParser::RuleStmt;
 }
 
-void MixedDrinksParser::StmtContext::copyFrom(StmtContext *ctx) {
-  ParserRuleContext::copyFrom(ctx);
-}
-
-//----------------- DeclareStmtContext ------------------------------------------------------------------
-
-MixedDrinksParser::Declaration_stmtContext* MixedDrinksParser::DeclareStmtContext::declaration_stmt() {
-  return getRuleContext<MixedDrinksParser::Declaration_stmtContext>(0);
-}
-
-MixedDrinksParser::DeclareStmtContext::DeclareStmtContext(StmtContext *ctx) { copyFrom(ctx); }
-
-antlrcpp::Any MixedDrinksParser::DeclareStmtContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any MixedDrinksParser::StmtContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitDeclareStmt(this);
+    return parserVisitor->visitStmt(this);
   else
     return visitor->visitChildren(this);
 }
-//----------------- IfStmtContext ------------------------------------------------------------------
 
-MixedDrinksParser::If_stmtContext* MixedDrinksParser::IfStmtContext::if_stmt() {
-  return getRuleContext<MixedDrinksParser::If_stmtContext>(0);
-}
-
-MixedDrinksParser::IfStmtContext::IfStmtContext(StmtContext *ctx) { copyFrom(ctx); }
-
-antlrcpp::Any MixedDrinksParser::IfStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitIfStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- AssignmentStmtContext ------------------------------------------------------------------
-
-MixedDrinksParser::Assignment_stmtContext* MixedDrinksParser::AssignmentStmtContext::assignment_stmt() {
-  return getRuleContext<MixedDrinksParser::Assignment_stmtContext>(0);
-}
-
-MixedDrinksParser::AssignmentStmtContext::AssignmentStmtContext(StmtContext *ctx) { copyFrom(ctx); }
-
-antlrcpp::Any MixedDrinksParser::AssignmentStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitAssignmentStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- RepeatStmtContext ------------------------------------------------------------------
-
-MixedDrinksParser::Chug_stmtContext* MixedDrinksParser::RepeatStmtContext::chug_stmt() {
-  return getRuleContext<MixedDrinksParser::Chug_stmtContext>(0);
-}
-
-MixedDrinksParser::RepeatStmtContext::RepeatStmtContext(StmtContext *ctx) { copyFrom(ctx); }
-
-antlrcpp::Any MixedDrinksParser::RepeatStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitRepeatStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
 MixedDrinksParser::StmtContext* MixedDrinksParser::stmt() {
   StmtContext *_localctx = _tracker.createInstance<StmtContext>(_ctx, getState());
-  enterRule(_localctx, 2, MixedDrinksParser::RuleStmt);
+  enterRule(_localctx, 6, MixedDrinksParser::RuleStmt);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
-    setState(39);
+    setState(71);
     _errHandler->sync(this);
-    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 1, _ctx)) {
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 2, _ctx)) {
     case 1: {
-      _localctx = dynamic_cast<StmtContext *>(_tracker.createInstance<MixedDrinksParser::IfStmtContext>(_localctx));
       enterOuterAlt(_localctx, 1);
-      setState(35);
+      setState(66);
       if_stmt();
       break;
     }
 
     case 2: {
-      _localctx = dynamic_cast<StmtContext *>(_tracker.createInstance<MixedDrinksParser::AssignmentStmtContext>(_localctx));
       enterOuterAlt(_localctx, 2);
-      setState(36);
+      setState(67);
       assignment_stmt();
       break;
     }
 
     case 3: {
-      _localctx = dynamic_cast<StmtContext *>(_tracker.createInstance<MixedDrinksParser::RepeatStmtContext>(_localctx));
       enterOuterAlt(_localctx, 3);
-      setState(37);
-      chug_stmt();
+      setState(68);
+      repeat_statement();
       break;
     }
 
     case 4: {
-      _localctx = dynamic_cast<StmtContext *>(_tracker.createInstance<MixedDrinksParser::DeclareStmtContext>(_localctx));
       enterOuterAlt(_localctx, 4);
-      setState(38);
+      setState(69);
       declaration_stmt();
+      break;
+    }
+
+    case 5: {
+      enterOuterAlt(_localctx, 5);
+      setState(70);
+      print_statement();
       break;
     }
 
@@ -229,8 +327,8 @@ MixedDrinksParser::If_stmtContext::If_stmtContext(ParserRuleContext *parent, siz
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* MixedDrinksParser::If_stmtContext::DRUNK() {
-  return getToken(MixedDrinksParser::DRUNK, 0);
+tree::TerminalNode* MixedDrinksParser::If_stmtContext::IF() {
+  return getToken(MixedDrinksParser::IF, 0);
 }
 
 MixedDrinksParser::ExprContext* MixedDrinksParser::If_stmtContext::expr() {
@@ -241,16 +339,16 @@ tree::TerminalNode* MixedDrinksParser::If_stmtContext::THEN() {
   return getToken(MixedDrinksParser::THEN, 0);
 }
 
-std::vector<MixedDrinksParser::StmtContext *> MixedDrinksParser::If_stmtContext::stmt() {
-  return getRuleContexts<MixedDrinksParser::StmtContext>();
+std::vector<MixedDrinksParser::Statement_listContext *> MixedDrinksParser::If_stmtContext::statement_list() {
+  return getRuleContexts<MixedDrinksParser::Statement_listContext>();
 }
 
-MixedDrinksParser::StmtContext* MixedDrinksParser::If_stmtContext::stmt(size_t i) {
-  return getRuleContext<MixedDrinksParser::StmtContext>(i);
+MixedDrinksParser::Statement_listContext* MixedDrinksParser::If_stmtContext::statement_list(size_t i) {
+  return getRuleContext<MixedDrinksParser::Statement_listContext>(i);
 }
 
-tree::TerminalNode* MixedDrinksParser::If_stmtContext::SOBER() {
-  return getToken(MixedDrinksParser::SOBER, 0);
+tree::TerminalNode* MixedDrinksParser::If_stmtContext::ELSE() {
+  return getToken(MixedDrinksParser::ELSE, 0);
 }
 
 
@@ -267,34 +365,35 @@ antlrcpp::Any MixedDrinksParser::If_stmtContext::accept(tree::ParseTreeVisitor *
 
 MixedDrinksParser::If_stmtContext* MixedDrinksParser::if_stmt() {
   If_stmtContext *_localctx = _tracker.createInstance<If_stmtContext>(_ctx, getState());
-  enterRule(_localctx, 4, MixedDrinksParser::RuleIf_stmt);
+  enterRule(_localctx, 8, MixedDrinksParser::RuleIf_stmt);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(41);
-    match(MixedDrinksParser::DRUNK);
-    setState(42);
+    setState(73);
+    match(MixedDrinksParser::IF);
+    setState(74);
     match(MixedDrinksParser::T__0);
-    setState(43);
+    setState(75);
     expr(0);
-    setState(44);
-    match(MixedDrinksParser::T__1);
-    setState(45);
+    setState(76);
+    match(MixedDrinksParser::T__2);
+    setState(77);
     match(MixedDrinksParser::THEN);
-    setState(46);
-    stmt();
-    setState(49);
+
+    setState(78);
+    statement_list();
+    setState(81);
     _errHandler->sync(this);
 
-    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 2, _ctx)) {
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx)) {
     case 1: {
-      setState(47);
-      match(MixedDrinksParser::SOBER);
-      setState(48);
-      stmt();
+      setState(79);
+      match(MixedDrinksParser::ELSE);
+      setState(80);
+      statement_list();
       break;
     }
 
@@ -342,18 +441,18 @@ antlrcpp::Any MixedDrinksParser::Assignment_stmtContext::accept(tree::ParseTreeV
 
 MixedDrinksParser::Assignment_stmtContext* MixedDrinksParser::assignment_stmt() {
   Assignment_stmtContext *_localctx = _tracker.createInstance<Assignment_stmtContext>(_ctx, getState());
-  enterRule(_localctx, 6, MixedDrinksParser::RuleAssignment_stmt);
+  enterRule(_localctx, 10, MixedDrinksParser::RuleAssignment_stmt);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(51);
+    setState(83);
     drink();
-    setState(52);
+    setState(84);
     match(MixedDrinksParser::EQ_OP);
-    setState(53);
+    setState(85);
     expr(0);
    
   }
@@ -398,18 +497,18 @@ antlrcpp::Any MixedDrinksParser::Declaration_stmtContext::accept(tree::ParseTree
 
 MixedDrinksParser::Declaration_stmtContext* MixedDrinksParser::declaration_stmt() {
   Declaration_stmtContext *_localctx = _tracker.createInstance<Declaration_stmtContext>(_ctx, getState());
-  enterRule(_localctx, 8, MixedDrinksParser::RuleDeclaration_stmt);
+  enterRule(_localctx, 12, MixedDrinksParser::RuleDeclaration_stmt);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(55);
+    setState(87);
     declaration();
-    setState(56);
+    setState(88);
     match(MixedDrinksParser::EQ_OP);
-    setState(57);
+    setState(89);
     expr(0);
    
   }
@@ -432,8 +531,8 @@ MixedDrinksParser::TypeIDContext* MixedDrinksParser::DeclarationContext::typeID(
   return getRuleContext<MixedDrinksParser::TypeIDContext>(0);
 }
 
-MixedDrinksParser::DrinkContext* MixedDrinksParser::DeclarationContext::drink() {
-  return getRuleContext<MixedDrinksParser::DrinkContext>(0);
+MixedDrinksParser::Variable_IDContext* MixedDrinksParser::DeclarationContext::variable_ID() {
+  return getRuleContext<MixedDrinksParser::Variable_IDContext>(0);
 }
 
 
@@ -450,17 +549,17 @@ antlrcpp::Any MixedDrinksParser::DeclarationContext::accept(tree::ParseTreeVisit
 
 MixedDrinksParser::DeclarationContext* MixedDrinksParser::declaration() {
   DeclarationContext *_localctx = _tracker.createInstance<DeclarationContext>(_ctx, getState());
-  enterRule(_localctx, 10, MixedDrinksParser::RuleDeclaration);
+  enterRule(_localctx, 14, MixedDrinksParser::RuleDeclaration);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(59);
+    setState(91);
     typeID();
-    setState(60);
-    drink();
+    setState(92);
+    variable_ID();
    
   }
   catch (RecognitionException &e) {
@@ -472,56 +571,100 @@ MixedDrinksParser::DeclarationContext* MixedDrinksParser::declaration() {
   return _localctx;
 }
 
-//----------------- Chug_stmtContext ------------------------------------------------------------------
+//----------------- Variable_IDContext ------------------------------------------------------------------
 
-MixedDrinksParser::Chug_stmtContext::Chug_stmtContext(ParserRuleContext *parent, size_t invokingState)
+MixedDrinksParser::Variable_IDContext::Variable_IDContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* MixedDrinksParser::Chug_stmtContext::CHUG() {
-  return getToken(MixedDrinksParser::CHUG, 0);
-}
-
-std::vector<MixedDrinksParser::ExprContext *> MixedDrinksParser::Chug_stmtContext::expr() {
-  return getRuleContexts<MixedDrinksParser::ExprContext>();
-}
-
-MixedDrinksParser::ExprContext* MixedDrinksParser::Chug_stmtContext::expr(size_t i) {
-  return getRuleContext<MixedDrinksParser::ExprContext>(i);
-}
-
-tree::TerminalNode* MixedDrinksParser::Chug_stmtContext::UNTIL() {
-  return getToken(MixedDrinksParser::UNTIL, 0);
+tree::TerminalNode* MixedDrinksParser::Variable_IDContext::IDENTIFIER() {
+  return getToken(MixedDrinksParser::IDENTIFIER, 0);
 }
 
 
-size_t MixedDrinksParser::Chug_stmtContext::getRuleIndex() const {
-  return MixedDrinksParser::RuleChug_stmt;
+size_t MixedDrinksParser::Variable_IDContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleVariable_ID;
 }
 
-antlrcpp::Any MixedDrinksParser::Chug_stmtContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any MixedDrinksParser::Variable_IDContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitChug_stmt(this);
+    return parserVisitor->visitVariable_ID(this);
   else
     return visitor->visitChildren(this);
 }
 
-MixedDrinksParser::Chug_stmtContext* MixedDrinksParser::chug_stmt() {
-  Chug_stmtContext *_localctx = _tracker.createInstance<Chug_stmtContext>(_ctx, getState());
-  enterRule(_localctx, 12, MixedDrinksParser::RuleChug_stmt);
+MixedDrinksParser::Variable_IDContext* MixedDrinksParser::variable_ID() {
+  Variable_IDContext *_localctx = _tracker.createInstance<Variable_IDContext>(_ctx, getState());
+  enterRule(_localctx, 16, MixedDrinksParser::RuleVariable_ID);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(62);
-    match(MixedDrinksParser::CHUG);
-    setState(63);
-    expr(0);
-    setState(64);
+    setState(94);
+    match(MixedDrinksParser::IDENTIFIER);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- Repeat_statementContext ------------------------------------------------------------------
+
+MixedDrinksParser::Repeat_statementContext::Repeat_statementContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* MixedDrinksParser::Repeat_statementContext::REPEAT() {
+  return getToken(MixedDrinksParser::REPEAT, 0);
+}
+
+MixedDrinksParser::Statement_listContext* MixedDrinksParser::Repeat_statementContext::statement_list() {
+  return getRuleContext<MixedDrinksParser::Statement_listContext>(0);
+}
+
+tree::TerminalNode* MixedDrinksParser::Repeat_statementContext::UNTIL() {
+  return getToken(MixedDrinksParser::UNTIL, 0);
+}
+
+MixedDrinksParser::ExprContext* MixedDrinksParser::Repeat_statementContext::expr() {
+  return getRuleContext<MixedDrinksParser::ExprContext>(0);
+}
+
+
+size_t MixedDrinksParser::Repeat_statementContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleRepeat_statement;
+}
+
+antlrcpp::Any MixedDrinksParser::Repeat_statementContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitRepeat_statement(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+MixedDrinksParser::Repeat_statementContext* MixedDrinksParser::repeat_statement() {
+  Repeat_statementContext *_localctx = _tracker.createInstance<Repeat_statementContext>(_ctx, getState());
+  enterRule(_localctx, 18, MixedDrinksParser::RuleRepeat_statement);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(96);
+    match(MixedDrinksParser::REPEAT);
+    setState(97);
+    statement_list();
+    setState(98);
     match(MixedDrinksParser::UNTIL);
-    setState(65);
+    setState(99);
     expr(0);
    
   }
@@ -534,35 +677,222 @@ MixedDrinksParser::Chug_stmtContext* MixedDrinksParser::chug_stmt() {
   return _localctx;
 }
 
-//----------------- Stmt_listContext ------------------------------------------------------------------
+//----------------- Statement_listContext ------------------------------------------------------------------
 
-MixedDrinksParser::Stmt_listContext::Stmt_listContext(ParserRuleContext *parent, size_t invokingState)
+MixedDrinksParser::Statement_listContext::Statement_listContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-std::vector<MixedDrinksParser::StmtContext *> MixedDrinksParser::Stmt_listContext::stmt() {
+std::vector<MixedDrinksParser::StmtContext *> MixedDrinksParser::Statement_listContext::stmt() {
   return getRuleContexts<MixedDrinksParser::StmtContext>();
 }
 
-MixedDrinksParser::StmtContext* MixedDrinksParser::Stmt_listContext::stmt(size_t i) {
+MixedDrinksParser::StmtContext* MixedDrinksParser::Statement_listContext::stmt(size_t i) {
   return getRuleContext<MixedDrinksParser::StmtContext>(i);
 }
 
 
-size_t MixedDrinksParser::Stmt_listContext::getRuleIndex() const {
-  return MixedDrinksParser::RuleStmt_list;
+size_t MixedDrinksParser::Statement_listContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleStatement_list;
 }
 
-antlrcpp::Any MixedDrinksParser::Stmt_listContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any MixedDrinksParser::Statement_listContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitStmt_list(this);
+    return parserVisitor->visitStatement_list(this);
   else
     return visitor->visitChildren(this);
 }
 
-MixedDrinksParser::Stmt_listContext* MixedDrinksParser::stmt_list() {
-  Stmt_listContext *_localctx = _tracker.createInstance<Stmt_listContext>(_ctx, getState());
-  enterRule(_localctx, 14, MixedDrinksParser::RuleStmt_list);
+MixedDrinksParser::Statement_listContext* MixedDrinksParser::statement_list() {
+  Statement_listContext *_localctx = _tracker.createInstance<Statement_listContext>(_ctx, getState());
+  enterRule(_localctx, 20, MixedDrinksParser::RuleStatement_list);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    size_t alt;
+    enterOuterAlt(_localctx, 1);
+    setState(101);
+    stmt();
+    setState(106);
+    _errHandler->sync(this);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 4, _ctx);
+    while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
+      if (alt == 1) {
+        setState(102);
+        match(MixedDrinksParser::T__3);
+        setState(103);
+        stmt(); 
+      }
+      setState(108);
+      _errHandler->sync(this);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 4, _ctx);
+    }
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- Print_statementContext ------------------------------------------------------------------
+
+MixedDrinksParser::Print_statementContext::Print_statementContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* MixedDrinksParser::Print_statementContext::PRINT() {
+  return getToken(MixedDrinksParser::PRINT, 0);
+}
+
+MixedDrinksParser::OutputContext* MixedDrinksParser::Print_statementContext::output() {
+  return getRuleContext<MixedDrinksParser::OutputContext>(0);
+}
+
+
+size_t MixedDrinksParser::Print_statementContext::getRuleIndex() const {
+  return MixedDrinksParser::RulePrint_statement;
+}
+
+antlrcpp::Any MixedDrinksParser::Print_statementContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitPrint_statement(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+MixedDrinksParser::Print_statementContext* MixedDrinksParser::print_statement() {
+  Print_statementContext *_localctx = _tracker.createInstance<Print_statementContext>(_ctx, getState());
+  enterRule(_localctx, 22, MixedDrinksParser::RulePrint_statement);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(109);
+    match(MixedDrinksParser::PRINT);
+    setState(110);
+    match(MixedDrinksParser::T__0);
+    setState(111);
+    output();
+    setState(112);
+    match(MixedDrinksParser::T__2);
+    setState(113);
+    match(MixedDrinksParser::T__4);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- OutputContext ------------------------------------------------------------------
+
+MixedDrinksParser::OutputContext::OutputContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+MixedDrinksParser::ExprContext* MixedDrinksParser::OutputContext::expr() {
+  return getRuleContext<MixedDrinksParser::ExprContext>(0);
+}
+
+MixedDrinksParser::DrinkNamesContext* MixedDrinksParser::OutputContext::drinkNames() {
+  return getRuleContext<MixedDrinksParser::DrinkNamesContext>(0);
+}
+
+
+size_t MixedDrinksParser::OutputContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleOutput;
+}
+
+antlrcpp::Any MixedDrinksParser::OutputContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitOutput(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+MixedDrinksParser::OutputContext* MixedDrinksParser::output() {
+  OutputContext *_localctx = _tracker.createInstance<OutputContext>(_ctx, getState());
+  enterRule(_localctx, 24, MixedDrinksParser::RuleOutput);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    setState(117);
+    _errHandler->sync(this);
+    switch (_input->LA(1)) {
+      case MixedDrinksParser::T__0:
+      case MixedDrinksParser::IDENTIFIER:
+      case MixedDrinksParser::INTEGER:
+      case MixedDrinksParser::CHARACTER: {
+        enterOuterAlt(_localctx, 1);
+        setState(115);
+        expr(0);
+        break;
+      }
+
+      case MixedDrinksParser::STRING: {
+        enterOuterAlt(_localctx, 2);
+        setState(116);
+        drinkNames();
+        break;
+      }
+
+    default:
+      throw NoViableAltException(this);
+    }
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- IdentifiersContext ------------------------------------------------------------------
+
+MixedDrinksParser::IdentifiersContext::IdentifiersContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+std::vector<MixedDrinksParser::ExprContext *> MixedDrinksParser::IdentifiersContext::expr() {
+  return getRuleContexts<MixedDrinksParser::ExprContext>();
+}
+
+MixedDrinksParser::ExprContext* MixedDrinksParser::IdentifiersContext::expr(size_t i) {
+  return getRuleContext<MixedDrinksParser::ExprContext>(i);
+}
+
+
+size_t MixedDrinksParser::IdentifiersContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleIdentifiers;
+}
+
+antlrcpp::Any MixedDrinksParser::IdentifiersContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitIdentifiers(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+MixedDrinksParser::IdentifiersContext* MixedDrinksParser::identifiers() {
+  IdentifiersContext *_localctx = _tracker.createInstance<IdentifiersContext>(_ctx, getState());
+  enterRule(_localctx, 26, MixedDrinksParser::RuleIdentifiers);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -570,17 +900,17 @@ MixedDrinksParser::Stmt_listContext* MixedDrinksParser::stmt_list() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(67);
-    stmt();
-    setState(72);
+    setState(119);
+    expr(0);
+    setState(124);
     _errHandler->sync(this);
     _la = _input->LA(1);
-    while (_la == MixedDrinksParser::T__2) {
-      setState(68);
-      match(MixedDrinksParser::T__2);
-      setState(69);
-      stmt();
-      setState(74);
+    while (_la == MixedDrinksParser::T__1) {
+      setState(120);
+      match(MixedDrinksParser::T__1);
+      setState(121);
+      expr(0);
+      setState(126);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
@@ -611,17 +941,17 @@ void MixedDrinksParser::ExprContext::copyFrom(ExprContext *ctx) {
   this->type = ctx->type;
 }
 
-//----------------- IdentifierContext ------------------------------------------------------------------
+//----------------- DrinkExpressionContext ------------------------------------------------------------------
 
-MixedDrinksParser::DrinkContext* MixedDrinksParser::IdentifierContext::drink() {
+MixedDrinksParser::DrinkContext* MixedDrinksParser::DrinkExpressionContext::drink() {
   return getRuleContext<MixedDrinksParser::DrinkContext>(0);
 }
 
-MixedDrinksParser::IdentifierContext::IdentifierContext(ExprContext *ctx) { copyFrom(ctx); }
+MixedDrinksParser::DrinkExpressionContext::DrinkExpressionContext(ExprContext *ctx) { copyFrom(ctx); }
 
-antlrcpp::Any MixedDrinksParser::IdentifierContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any MixedDrinksParser::DrinkExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitIdentifier(this);
+    return parserVisitor->visitDrinkExpression(this);
   else
     return visitor->visitChildren(this);
 }
@@ -661,17 +991,17 @@ antlrcpp::Any MixedDrinksParser::AddSubExprContext::accept(tree::ParseTreeVisito
   else
     return visitor->visitChildren(this);
 }
-//----------------- IntegerContext ------------------------------------------------------------------
+//----------------- NumberExpressionContext ------------------------------------------------------------------
 
-MixedDrinksParser::ShotsContext* MixedDrinksParser::IntegerContext::shots() {
-  return getRuleContext<MixedDrinksParser::ShotsContext>(0);
+MixedDrinksParser::NumberContext* MixedDrinksParser::NumberExpressionContext::number() {
+  return getRuleContext<MixedDrinksParser::NumberContext>(0);
 }
 
-MixedDrinksParser::IntegerContext::IntegerContext(ExprContext *ctx) { copyFrom(ctx); }
+MixedDrinksParser::NumberExpressionContext::NumberExpressionContext(ExprContext *ctx) { copyFrom(ctx); }
 
-antlrcpp::Any MixedDrinksParser::IntegerContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any MixedDrinksParser::NumberExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitInteger(this);
+    return parserVisitor->visitNumberExpression(this);
   else
     return visitor->visitChildren(this);
 }
@@ -730,8 +1060,8 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::expr(int precedence) {
   MixedDrinksParser::ExprContext *_localctx = _tracker.createInstance<ExprContext>(_ctx, parentState);
   MixedDrinksParser::ExprContext *previousContext = _localctx;
   (void)previousContext; // Silence compiler, in case the context is not used by generated code.
-  size_t startState = 16;
-  enterRecursionRule(_localctx, 16, MixedDrinksParser::RuleExpr, precedence);
+  size_t startState = 28;
+  enterRecursionRule(_localctx, 28, MixedDrinksParser::RuleExpr, precedence);
 
     
 
@@ -741,25 +1071,26 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::expr(int precedence) {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(82);
+    setState(134);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case MixedDrinksParser::IDENTIFIER: {
-        _localctx = _tracker.createInstance<IdentifierContext>(_localctx);
+        _localctx = _tracker.createInstance<DrinkExpressionContext>(_localctx);
         _ctx = _localctx;
         previousContext = _localctx;
 
-        setState(76);
+        setState(128);
         drink();
         break;
       }
 
-      case MixedDrinksParser::INTEGER: {
-        _localctx = _tracker.createInstance<IntegerContext>(_localctx);
+      case MixedDrinksParser::INTEGER:
+      case MixedDrinksParser::CHARACTER: {
+        _localctx = _tracker.createInstance<NumberExpressionContext>(_localctx);
         _ctx = _localctx;
         previousContext = _localctx;
-        setState(77);
-        shots();
+        setState(129);
+        number();
         break;
       }
 
@@ -767,12 +1098,12 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::expr(int precedence) {
         _localctx = _tracker.createInstance<ParensContext>(_localctx);
         _ctx = _localctx;
         previousContext = _localctx;
-        setState(78);
+        setState(130);
         match(MixedDrinksParser::T__0);
-        setState(79);
+        setState(131);
         expr(0);
-        setState(80);
-        match(MixedDrinksParser::T__1);
+        setState(132);
+        match(MixedDrinksParser::T__2);
         break;
       }
 
@@ -780,27 +1111,27 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::expr(int precedence) {
       throw NoViableAltException(this);
     }
     _ctx->stop = _input->LT(-1);
-    setState(98);
+    setState(150);
     _errHandler->sync(this);
-    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 6, _ctx);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 9, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
         if (!_parseListeners.empty())
           triggerExitRuleEvent();
         previousContext = _localctx;
-        setState(96);
+        setState(148);
         _errHandler->sync(this);
-        switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 5, _ctx)) {
+        switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx)) {
         case 1: {
           auto newContext = _tracker.createInstance<MulDivExprContext>(_tracker.createInstance<ExprContext>(parentContext, parentState));
           _localctx = newContext;
           pushNewRecursionContext(newContext, startState, RuleExpr);
-          setState(84);
+          setState(136);
 
           if (!(precpred(_ctx, 6))) throw FailedPredicateException(this, "precpred(_ctx, 6)");
-          setState(85);
+          setState(137);
           mul_div_op();
-          setState(86);
+          setState(138);
           expr(7);
           break;
         }
@@ -809,12 +1140,12 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::expr(int precedence) {
           auto newContext = _tracker.createInstance<AddSubExprContext>(_tracker.createInstance<ExprContext>(parentContext, parentState));
           _localctx = newContext;
           pushNewRecursionContext(newContext, startState, RuleExpr);
-          setState(88);
+          setState(140);
 
           if (!(precpred(_ctx, 5))) throw FailedPredicateException(this, "precpred(_ctx, 5)");
-          setState(89);
+          setState(141);
           add_sub_op();
-          setState(90);
+          setState(142);
           expr(6);
           break;
         }
@@ -823,21 +1154,21 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::expr(int precedence) {
           auto newContext = _tracker.createInstance<RelExprContext>(_tracker.createInstance<ExprContext>(parentContext, parentState));
           _localctx = newContext;
           pushNewRecursionContext(newContext, startState, RuleExpr);
-          setState(92);
+          setState(144);
 
           if (!(precpred(_ctx, 4))) throw FailedPredicateException(this, "precpred(_ctx, 4)");
-          setState(93);
+          setState(145);
           rel_op();
-          setState(94);
+          setState(146);
           expr(5);
           break;
         }
 
         } 
       }
-      setState(100);
+      setState(152);
       _errHandler->sync(this);
-      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 6, _ctx);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 9, _ctx);
     }
   }
   catch (RecognitionException &e) {
@@ -845,6 +1176,135 @@ MixedDrinksParser::ExprContext* MixedDrinksParser::expr(int precedence) {
     _localctx->exception = std::current_exception();
     _errHandler->recover(this, _localctx->exception);
   }
+  return _localctx;
+}
+
+//----------------- NumberContext ------------------------------------------------------------------
+
+MixedDrinksParser::NumberContext::NumberContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+
+size_t MixedDrinksParser::NumberContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleNumber;
+}
+
+void MixedDrinksParser::NumberContext::copyFrom(NumberContext *ctx) {
+  ParserRuleContext::copyFrom(ctx);
+  this->type = ctx->type;
+}
+
+//----------------- Integer_constantContext ------------------------------------------------------------------
+
+tree::TerminalNode* MixedDrinksParser::Integer_constantContext::INTEGER() {
+  return getToken(MixedDrinksParser::INTEGER, 0);
+}
+
+MixedDrinksParser::Integer_constantContext::Integer_constantContext(NumberContext *ctx) { copyFrom(ctx); }
+
+antlrcpp::Any MixedDrinksParser::Integer_constantContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitInteger_constant(this);
+  else
+    return visitor->visitChildren(this);
+}
+//----------------- Character_constantContext ------------------------------------------------------------------
+
+tree::TerminalNode* MixedDrinksParser::Character_constantContext::CHARACTER() {
+  return getToken(MixedDrinksParser::CHARACTER, 0);
+}
+
+MixedDrinksParser::Character_constantContext::Character_constantContext(NumberContext *ctx) { copyFrom(ctx); }
+
+antlrcpp::Any MixedDrinksParser::Character_constantContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitCharacter_constant(this);
+  else
+    return visitor->visitChildren(this);
+}
+MixedDrinksParser::NumberContext* MixedDrinksParser::number() {
+  NumberContext *_localctx = _tracker.createInstance<NumberContext>(_ctx, getState());
+  enterRule(_localctx, 30, MixedDrinksParser::RuleNumber);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    setState(155);
+    _errHandler->sync(this);
+    switch (_input->LA(1)) {
+      case MixedDrinksParser::INTEGER: {
+        _localctx = dynamic_cast<NumberContext *>(_tracker.createInstance<MixedDrinksParser::Integer_constantContext>(_localctx));
+        enterOuterAlt(_localctx, 1);
+        setState(153);
+        match(MixedDrinksParser::INTEGER);
+        break;
+      }
+
+      case MixedDrinksParser::CHARACTER: {
+        _localctx = dynamic_cast<NumberContext *>(_tracker.createInstance<MixedDrinksParser::Character_constantContext>(_localctx));
+        enterOuterAlt(_localctx, 2);
+        setState(154);
+        match(MixedDrinksParser::CHARACTER);
+        break;
+      }
+
+    default:
+      throw NoViableAltException(this);
+    }
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- DrinkNamesContext ------------------------------------------------------------------
+
+MixedDrinksParser::DrinkNamesContext::DrinkNamesContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* MixedDrinksParser::DrinkNamesContext::STRING() {
+  return getToken(MixedDrinksParser::STRING, 0);
+}
+
+
+size_t MixedDrinksParser::DrinkNamesContext::getRuleIndex() const {
+  return MixedDrinksParser::RuleDrinkNames;
+}
+
+antlrcpp::Any MixedDrinksParser::DrinkNamesContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
+    return parserVisitor->visitDrinkNames(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+MixedDrinksParser::DrinkNamesContext* MixedDrinksParser::drinkNames() {
+  DrinkNamesContext *_localctx = _tracker.createInstance<DrinkNamesContext>(_ctx, getState());
+  enterRule(_localctx, 32, MixedDrinksParser::RuleDrinkNames);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(157);
+    match(MixedDrinksParser::STRING);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
   return _localctx;
 }
 
@@ -858,12 +1318,12 @@ tree::TerminalNode* MixedDrinksParser::TypeIDContext::IDENTIFIER() {
   return getToken(MixedDrinksParser::IDENTIFIER, 0);
 }
 
-tree::TerminalNode* MixedDrinksParser::TypeIDContext::BEER() {
-  return getToken(MixedDrinksParser::BEER, 0);
+tree::TerminalNode* MixedDrinksParser::TypeIDContext::CHARACTER() {
+  return getToken(MixedDrinksParser::CHARACTER, 0);
 }
 
-tree::TerminalNode* MixedDrinksParser::TypeIDContext::SPRITS() {
-  return getToken(MixedDrinksParser::SPRITS, 0);
+tree::TerminalNode* MixedDrinksParser::TypeIDContext::INTEGER() {
+  return getToken(MixedDrinksParser::INTEGER, 0);
 }
 
 
@@ -880,7 +1340,7 @@ antlrcpp::Any MixedDrinksParser::TypeIDContext::accept(tree::ParseTreeVisitor *v
 
 MixedDrinksParser::TypeIDContext* MixedDrinksParser::typeID() {
   TypeIDContext *_localctx = _tracker.createInstance<TypeIDContext>(_ctx, getState());
-  enterRule(_localctx, 18, MixedDrinksParser::RuleTypeID);
+  enterRule(_localctx, 34, MixedDrinksParser::RuleTypeID);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -888,12 +1348,12 @@ MixedDrinksParser::TypeIDContext* MixedDrinksParser::typeID() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(101);
+    setState(159);
     _la = _input->LA(1);
     if (!((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & ((1ULL << MixedDrinksParser::BEER)
-      | (1ULL << MixedDrinksParser::SPRITS)
-      | (1ULL << MixedDrinksParser::IDENTIFIER))) != 0))) {
+      ((1ULL << _la) & ((1ULL << MixedDrinksParser::IDENTIFIER)
+      | (1ULL << MixedDrinksParser::INTEGER)
+      | (1ULL << MixedDrinksParser::CHARACTER))) != 0))) {
     _errHandler->recoverInline(this);
     }
     else {
@@ -935,59 +1395,15 @@ antlrcpp::Any MixedDrinksParser::DrinkContext::accept(tree::ParseTreeVisitor *vi
 
 MixedDrinksParser::DrinkContext* MixedDrinksParser::drink() {
   DrinkContext *_localctx = _tracker.createInstance<DrinkContext>(_ctx, getState());
-  enterRule(_localctx, 20, MixedDrinksParser::RuleDrink);
+  enterRule(_localctx, 36, MixedDrinksParser::RuleDrink);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(103);
+    setState(161);
     match(MixedDrinksParser::IDENTIFIER);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- ShotsContext ------------------------------------------------------------------
-
-MixedDrinksParser::ShotsContext::ShotsContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* MixedDrinksParser::ShotsContext::INTEGER() {
-  return getToken(MixedDrinksParser::INTEGER, 0);
-}
-
-
-size_t MixedDrinksParser::ShotsContext::getRuleIndex() const {
-  return MixedDrinksParser::RuleShots;
-}
-
-antlrcpp::Any MixedDrinksParser::ShotsContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<MixedDrinksVisitor*>(visitor))
-    return parserVisitor->visitShots(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-MixedDrinksParser::ShotsContext* MixedDrinksParser::shots() {
-  ShotsContext *_localctx = _tracker.createInstance<ShotsContext>(_ctx, getState());
-  enterRule(_localctx, 22, MixedDrinksParser::RuleShots);
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(105);
-    match(MixedDrinksParser::INTEGER);
    
   }
   catch (RecognitionException &e) {
@@ -1027,7 +1443,7 @@ antlrcpp::Any MixedDrinksParser::Mul_div_opContext::accept(tree::ParseTreeVisito
 
 MixedDrinksParser::Mul_div_opContext* MixedDrinksParser::mul_div_op() {
   Mul_div_opContext *_localctx = _tracker.createInstance<Mul_div_opContext>(_ctx, getState());
-  enterRule(_localctx, 24, MixedDrinksParser::RuleMul_div_op);
+  enterRule(_localctx, 38, MixedDrinksParser::RuleMul_div_op);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -1035,7 +1451,7 @@ MixedDrinksParser::Mul_div_opContext* MixedDrinksParser::mul_div_op() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(107);
+    setState(163);
     _la = _input->LA(1);
     if (!(_la == MixedDrinksParser::MUL_OP
 
@@ -1085,7 +1501,7 @@ antlrcpp::Any MixedDrinksParser::Add_sub_opContext::accept(tree::ParseTreeVisito
 
 MixedDrinksParser::Add_sub_opContext* MixedDrinksParser::add_sub_op() {
   Add_sub_opContext *_localctx = _tracker.createInstance<Add_sub_opContext>(_ctx, getState());
-  enterRule(_localctx, 26, MixedDrinksParser::RuleAdd_sub_op);
+  enterRule(_localctx, 40, MixedDrinksParser::RuleAdd_sub_op);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -1093,7 +1509,7 @@ MixedDrinksParser::Add_sub_opContext* MixedDrinksParser::add_sub_op() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(109);
+    setState(165);
     _la = _input->LA(1);
     if (!(_la == MixedDrinksParser::ADD_OP
 
@@ -1159,7 +1575,7 @@ antlrcpp::Any MixedDrinksParser::Rel_opContext::accept(tree::ParseTreeVisitor *v
 
 MixedDrinksParser::Rel_opContext* MixedDrinksParser::rel_op() {
   Rel_opContext *_localctx = _tracker.createInstance<Rel_opContext>(_ctx, getState());
-  enterRule(_localctx, 28, MixedDrinksParser::RuleRel_op);
+  enterRule(_localctx, 42, MixedDrinksParser::RuleRel_op);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -1167,7 +1583,7 @@ MixedDrinksParser::Rel_opContext* MixedDrinksParser::rel_op() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(111);
+    setState(167);
     _la = _input->LA(1);
     if (!((((_la & ~ 0x3fULL) == 0) &&
       ((1ULL << _la) & ((1ULL << MixedDrinksParser::EQ_OP)
@@ -1195,7 +1611,7 @@ MixedDrinksParser::Rel_opContext* MixedDrinksParser::rel_op() {
 
 bool MixedDrinksParser::sempred(RuleContext *context, size_t ruleIndex, size_t predicateIndex) {
   switch (ruleIndex) {
-    case 8: return exprSempred(dynamic_cast<ExprContext *>(context), predicateIndex);
+    case 14: return exprSempred(dynamic_cast<ExprContext *>(context), predicateIndex);
 
   default:
     break;
@@ -1224,21 +1640,24 @@ atn::ATN MixedDrinksParser::_atn;
 std::vector<uint16_t> MixedDrinksParser::_serializedATN;
 
 std::vector<std::string> MixedDrinksParser::_ruleNames = {
-  "prog", "stmt", "if_stmt", "assignment_stmt", "declaration_stmt", "declaration", 
-  "chug_stmt", "stmt_list", "expr", "typeID", "drink", "shots", "mul_div_op", 
-  "add_sub_op", "rel_op"
+  "prog", "main", "block", "stmt", "if_stmt", "assignment_stmt", "declaration_stmt", 
+  "declaration", "variable_ID", "repeat_statement", "statement_list", "print_statement", 
+  "output", "identifiers", "expr", "number", "drinkNames", "typeID", "drink", 
+  "mul_div_op", "add_sub_op", "rel_op"
 };
 
 std::vector<std::string> MixedDrinksParser::_literalNames = {
-  "", "'('", "')'", "';'", "'CHUG'", "'UNTIL'", "'DRUNK'", "'THEN'", "'SOBER'", 
-  "'BEER'", "'SPRITS'", "", "", "'*'", "'/'", "'+'", "'-'", "'='", "'<>'", 
+  "", "'('", "','", "')'", "';'", "'.'", "'MIXED_DRINKS'", "'START'", "'STOP'", 
+  "'CHUG'", "'UNTIL'", "'DRUNK'", "'DO'", "'SOBER'", "'SHOTS'", "'SPRITS'", 
+  "'SPILL'", "", "", "", "", "'*'", "'/'", "'+'", "'-'", "'='", "'<>'", 
   "'<'", "'<='", "'>'", "'>='"
 };
 
 std::vector<std::string> MixedDrinksParser::_symbolicNames = {
-  "", "", "", "", "CHUG", "UNTIL", "DRUNK", "THEN", "SOBER", "BEER", "SPRITS", 
-  "IDENTIFIER", "INTEGER", "MUL_OP", "DIV_OP", "ADD_OP", "SUB_OP", "EQ_OP", 
-  "NE_OP", "LT_OP", "LE_OP", "GT_OP", "GE_OP", "NEWLINE", "WS"
+  "", "", "", "", "", "", "MIXED_DRINKS", "BEGIN", "END", "REPEAT", "UNTIL", 
+  "IF", "THEN", "ELSE", "INTEGER_TYPE", "CHARACTER_TYPE", "PRINT", "IDENTIFIER", 
+  "INTEGER", "CHARACTER", "STRING", "MUL_OP", "DIV_OP", "ADD_OP", "SUB_OP", 
+  "EQ_OP", "NE_OP", "LT_OP", "LE_OP", "GT_OP", "GE_OP", "NEWLINE", "WS"
 };
 
 dfa::Vocabulary MixedDrinksParser::_vocabulary(_literalNames, _symbolicNames);
@@ -1261,78 +1680,112 @@ MixedDrinksParser::Initializer::Initializer() {
 
   _serializedATN = {
     0x3, 0x608b, 0xa72a, 0x8133, 0xb9ed, 0x417c, 0x3be7, 0x7786, 0x5964, 
-    0x3, 0x1a, 0x74, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x4, 0x4, 0x9, 
+    0x3, 0x22, 0xac, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x4, 0x4, 0x9, 
     0x4, 0x4, 0x5, 0x9, 0x5, 0x4, 0x6, 0x9, 0x6, 0x4, 0x7, 0x9, 0x7, 0x4, 
     0x8, 0x9, 0x8, 0x4, 0x9, 0x9, 0x9, 0x4, 0xa, 0x9, 0xa, 0x4, 0xb, 0x9, 
     0xb, 0x4, 0xc, 0x9, 0xc, 0x4, 0xd, 0x9, 0xd, 0x4, 0xe, 0x9, 0xe, 0x4, 
-    0xf, 0x9, 0xf, 0x4, 0x10, 0x9, 0x10, 0x3, 0x2, 0x6, 0x2, 0x22, 0xa, 
-    0x2, 0xd, 0x2, 0xe, 0x2, 0x23, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 
-    0x5, 0x3, 0x2a, 0xa, 0x3, 0x3, 0x4, 0x3, 0x4, 0x3, 0x4, 0x3, 0x4, 0x3, 
-    0x4, 0x3, 0x4, 0x3, 0x4, 0x3, 0x4, 0x5, 0x4, 0x34, 0xa, 0x4, 0x3, 0x5, 
-    0x3, 0x5, 0x3, 0x5, 0x3, 0x5, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 
-    0x3, 0x7, 0x3, 0x7, 0x3, 0x7, 0x3, 0x8, 0x3, 0x8, 0x3, 0x8, 0x3, 0x8, 
-    0x3, 0x8, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x7, 0x9, 0x49, 0xa, 0x9, 0xc, 
-    0x9, 0xe, 0x9, 0x4c, 0xb, 0x9, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 
-    0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x5, 0xa, 0x55, 0xa, 0xa, 0x3, 0xa, 0x3, 
-    0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 
-    0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x7, 0xa, 0x63, 0xa, 0xa, 0xc, 0xa, 
-    0xe, 0xa, 0x66, 0xb, 0xa, 0x3, 0xb, 0x3, 0xb, 0x3, 0xc, 0x3, 0xc, 0x3, 
-    0xd, 0x3, 0xd, 0x3, 0xe, 0x3, 0xe, 0x3, 0xf, 0x3, 0xf, 0x3, 0x10, 0x3, 
-    0x10, 0x3, 0x10, 0x2, 0x3, 0x12, 0x11, 0x2, 0x4, 0x6, 0x8, 0xa, 0xc, 
-    0xe, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1a, 0x1c, 0x1e, 0x2, 0x6, 0x3, 
-    0x2, 0xb, 0xd, 0x3, 0x2, 0xf, 0x10, 0x3, 0x2, 0x11, 0x12, 0x3, 0x2, 
-    0x13, 0x18, 0x2, 0x6f, 0x2, 0x21, 0x3, 0x2, 0x2, 0x2, 0x4, 0x29, 0x3, 
-    0x2, 0x2, 0x2, 0x6, 0x2b, 0x3, 0x2, 0x2, 0x2, 0x8, 0x35, 0x3, 0x2, 0x2, 
-    0x2, 0xa, 0x39, 0x3, 0x2, 0x2, 0x2, 0xc, 0x3d, 0x3, 0x2, 0x2, 0x2, 0xe, 
-    0x40, 0x3, 0x2, 0x2, 0x2, 0x10, 0x45, 0x3, 0x2, 0x2, 0x2, 0x12, 0x54, 
-    0x3, 0x2, 0x2, 0x2, 0x14, 0x67, 0x3, 0x2, 0x2, 0x2, 0x16, 0x69, 0x3, 
-    0x2, 0x2, 0x2, 0x18, 0x6b, 0x3, 0x2, 0x2, 0x2, 0x1a, 0x6d, 0x3, 0x2, 
-    0x2, 0x2, 0x1c, 0x6f, 0x3, 0x2, 0x2, 0x2, 0x1e, 0x71, 0x3, 0x2, 0x2, 
-    0x2, 0x20, 0x22, 0x5, 0x4, 0x3, 0x2, 0x21, 0x20, 0x3, 0x2, 0x2, 0x2, 
-    0x22, 0x23, 0x3, 0x2, 0x2, 0x2, 0x23, 0x21, 0x3, 0x2, 0x2, 0x2, 0x23, 
-    0x24, 0x3, 0x2, 0x2, 0x2, 0x24, 0x3, 0x3, 0x2, 0x2, 0x2, 0x25, 0x2a, 
-    0x5, 0x6, 0x4, 0x2, 0x26, 0x2a, 0x5, 0x8, 0x5, 0x2, 0x27, 0x2a, 0x5, 
-    0xe, 0x8, 0x2, 0x28, 0x2a, 0x5, 0xa, 0x6, 0x2, 0x29, 0x25, 0x3, 0x2, 
-    0x2, 0x2, 0x29, 0x26, 0x3, 0x2, 0x2, 0x2, 0x29, 0x27, 0x3, 0x2, 0x2, 
-    0x2, 0x29, 0x28, 0x3, 0x2, 0x2, 0x2, 0x2a, 0x5, 0x3, 0x2, 0x2, 0x2, 
-    0x2b, 0x2c, 0x7, 0x8, 0x2, 0x2, 0x2c, 0x2d, 0x7, 0x3, 0x2, 0x2, 0x2d, 
-    0x2e, 0x5, 0x12, 0xa, 0x2, 0x2e, 0x2f, 0x7, 0x4, 0x2, 0x2, 0x2f, 0x30, 
-    0x7, 0x9, 0x2, 0x2, 0x30, 0x33, 0x5, 0x4, 0x3, 0x2, 0x31, 0x32, 0x7, 
-    0xa, 0x2, 0x2, 0x32, 0x34, 0x5, 0x4, 0x3, 0x2, 0x33, 0x31, 0x3, 0x2, 
-    0x2, 0x2, 0x33, 0x34, 0x3, 0x2, 0x2, 0x2, 0x34, 0x7, 0x3, 0x2, 0x2, 
-    0x2, 0x35, 0x36, 0x5, 0x16, 0xc, 0x2, 0x36, 0x37, 0x7, 0x13, 0x2, 0x2, 
-    0x37, 0x38, 0x5, 0x12, 0xa, 0x2, 0x38, 0x9, 0x3, 0x2, 0x2, 0x2, 0x39, 
-    0x3a, 0x5, 0xc, 0x7, 0x2, 0x3a, 0x3b, 0x7, 0x13, 0x2, 0x2, 0x3b, 0x3c, 
-    0x5, 0x12, 0xa, 0x2, 0x3c, 0xb, 0x3, 0x2, 0x2, 0x2, 0x3d, 0x3e, 0x5, 
-    0x14, 0xb, 0x2, 0x3e, 0x3f, 0x5, 0x16, 0xc, 0x2, 0x3f, 0xd, 0x3, 0x2, 
-    0x2, 0x2, 0x40, 0x41, 0x7, 0x6, 0x2, 0x2, 0x41, 0x42, 0x5, 0x12, 0xa, 
-    0x2, 0x42, 0x43, 0x7, 0x7, 0x2, 0x2, 0x43, 0x44, 0x5, 0x12, 0xa, 0x2, 
-    0x44, 0xf, 0x3, 0x2, 0x2, 0x2, 0x45, 0x4a, 0x5, 0x4, 0x3, 0x2, 0x46, 
-    0x47, 0x7, 0x5, 0x2, 0x2, 0x47, 0x49, 0x5, 0x4, 0x3, 0x2, 0x48, 0x46, 
-    0x3, 0x2, 0x2, 0x2, 0x49, 0x4c, 0x3, 0x2, 0x2, 0x2, 0x4a, 0x48, 0x3, 
-    0x2, 0x2, 0x2, 0x4a, 0x4b, 0x3, 0x2, 0x2, 0x2, 0x4b, 0x11, 0x3, 0x2, 
-    0x2, 0x2, 0x4c, 0x4a, 0x3, 0x2, 0x2, 0x2, 0x4d, 0x4e, 0x8, 0xa, 0x1, 
-    0x2, 0x4e, 0x55, 0x5, 0x16, 0xc, 0x2, 0x4f, 0x55, 0x5, 0x18, 0xd, 0x2, 
-    0x50, 0x51, 0x7, 0x3, 0x2, 0x2, 0x51, 0x52, 0x5, 0x12, 0xa, 0x2, 0x52, 
-    0x53, 0x7, 0x4, 0x2, 0x2, 0x53, 0x55, 0x3, 0x2, 0x2, 0x2, 0x54, 0x4d, 
-    0x3, 0x2, 0x2, 0x2, 0x54, 0x4f, 0x3, 0x2, 0x2, 0x2, 0x54, 0x50, 0x3, 
-    0x2, 0x2, 0x2, 0x55, 0x64, 0x3, 0x2, 0x2, 0x2, 0x56, 0x57, 0xc, 0x8, 
-    0x2, 0x2, 0x57, 0x58, 0x5, 0x1a, 0xe, 0x2, 0x58, 0x59, 0x5, 0x12, 0xa, 
-    0x9, 0x59, 0x63, 0x3, 0x2, 0x2, 0x2, 0x5a, 0x5b, 0xc, 0x7, 0x2, 0x2, 
-    0x5b, 0x5c, 0x5, 0x1c, 0xf, 0x2, 0x5c, 0x5d, 0x5, 0x12, 0xa, 0x8, 0x5d, 
-    0x63, 0x3, 0x2, 0x2, 0x2, 0x5e, 0x5f, 0xc, 0x6, 0x2, 0x2, 0x5f, 0x60, 
-    0x5, 0x1e, 0x10, 0x2, 0x60, 0x61, 0x5, 0x12, 0xa, 0x7, 0x61, 0x63, 0x3, 
-    0x2, 0x2, 0x2, 0x62, 0x56, 0x3, 0x2, 0x2, 0x2, 0x62, 0x5a, 0x3, 0x2, 
-    0x2, 0x2, 0x62, 0x5e, 0x3, 0x2, 0x2, 0x2, 0x63, 0x66, 0x3, 0x2, 0x2, 
-    0x2, 0x64, 0x62, 0x3, 0x2, 0x2, 0x2, 0x64, 0x65, 0x3, 0x2, 0x2, 0x2, 
-    0x65, 0x13, 0x3, 0x2, 0x2, 0x2, 0x66, 0x64, 0x3, 0x2, 0x2, 0x2, 0x67, 
-    0x68, 0x9, 0x2, 0x2, 0x2, 0x68, 0x15, 0x3, 0x2, 0x2, 0x2, 0x69, 0x6a, 
-    0x7, 0xd, 0x2, 0x2, 0x6a, 0x17, 0x3, 0x2, 0x2, 0x2, 0x6b, 0x6c, 0x7, 
-    0xe, 0x2, 0x2, 0x6c, 0x19, 0x3, 0x2, 0x2, 0x2, 0x6d, 0x6e, 0x9, 0x3, 
-    0x2, 0x2, 0x6e, 0x1b, 0x3, 0x2, 0x2, 0x2, 0x6f, 0x70, 0x9, 0x4, 0x2, 
-    0x2, 0x70, 0x1d, 0x3, 0x2, 0x2, 0x2, 0x71, 0x72, 0x9, 0x5, 0x2, 0x2, 
-    0x72, 0x1f, 0x3, 0x2, 0x2, 0x2, 0x9, 0x23, 0x29, 0x33, 0x4a, 0x54, 0x62, 
-    0x64, 
+    0xf, 0x9, 0xf, 0x4, 0x10, 0x9, 0x10, 0x4, 0x11, 0x9, 0x11, 0x4, 0x12, 
+    0x9, 0x12, 0x4, 0x13, 0x9, 0x13, 0x4, 0x14, 0x9, 0x14, 0x4, 0x15, 0x9, 
+    0x15, 0x4, 0x16, 0x9, 0x16, 0x4, 0x17, 0x9, 0x17, 0x3, 0x2, 0x3, 0x2, 
+    0x3, 0x2, 0x3, 0x2, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 
+    0x3, 0x3, 0x3, 0x3, 0x5, 0x3, 0x3a, 0xa, 0x3, 0x7, 0x3, 0x3c, 0xa, 0x3, 
+    0xc, 0x3, 0xe, 0x3, 0x3f, 0xb, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x4, 0x3, 
+    0x4, 0x3, 0x5, 0x3, 0x5, 0x3, 0x5, 0x3, 0x5, 0x3, 0x5, 0x5, 0x5, 0x4a, 
+    0xa, 0x5, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 
+    0x3, 0x6, 0x3, 0x6, 0x5, 0x6, 0x54, 0xa, 0x6, 0x3, 0x7, 0x3, 0x7, 0x3, 
+    0x7, 0x3, 0x7, 0x3, 0x8, 0x3, 0x8, 0x3, 0x8, 0x3, 0x8, 0x3, 0x9, 0x3, 
+    0x9, 0x3, 0x9, 0x3, 0xa, 0x3, 0xa, 0x3, 0xb, 0x3, 0xb, 0x3, 0xb, 0x3, 
+    0xb, 0x3, 0xb, 0x3, 0xc, 0x3, 0xc, 0x3, 0xc, 0x7, 0xc, 0x6b, 0xa, 0xc, 
+    0xc, 0xc, 0xe, 0xc, 0x6e, 0xb, 0xc, 0x3, 0xd, 0x3, 0xd, 0x3, 0xd, 0x3, 
+    0xd, 0x3, 0xd, 0x3, 0xd, 0x3, 0xe, 0x3, 0xe, 0x5, 0xe, 0x78, 0xa, 0xe, 
+    0x3, 0xf, 0x3, 0xf, 0x3, 0xf, 0x7, 0xf, 0x7d, 0xa, 0xf, 0xc, 0xf, 0xe, 
+    0xf, 0x80, 0xb, 0xf, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 
+    0x10, 0x3, 0x10, 0x3, 0x10, 0x5, 0x10, 0x89, 0xa, 0x10, 0x3, 0x10, 0x3, 
+    0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 
+    0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x7, 0x10, 0x97, 0xa, 0x10, 
+    0xc, 0x10, 0xe, 0x10, 0x9a, 0xb, 0x10, 0x3, 0x11, 0x3, 0x11, 0x5, 0x11, 
+    0x9e, 0xa, 0x11, 0x3, 0x12, 0x3, 0x12, 0x3, 0x13, 0x3, 0x13, 0x3, 0x14, 
+    0x3, 0x14, 0x3, 0x15, 0x3, 0x15, 0x3, 0x16, 0x3, 0x16, 0x3, 0x17, 0x3, 
+    0x17, 0x3, 0x17, 0x2, 0x3, 0x1e, 0x18, 0x2, 0x4, 0x6, 0x8, 0xa, 0xc, 
+    0xe, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1a, 0x1c, 0x1e, 0x20, 0x22, 0x24, 
+    0x26, 0x28, 0x2a, 0x2c, 0x2, 0x6, 0x3, 0x2, 0x13, 0x15, 0x3, 0x2, 0x17, 
+    0x18, 0x3, 0x2, 0x19, 0x1a, 0x3, 0x2, 0x1b, 0x20, 0x2, 0xa5, 0x2, 0x2e, 
+    0x3, 0x2, 0x2, 0x2, 0x4, 0x32, 0x3, 0x2, 0x2, 0x2, 0x6, 0x42, 0x3, 0x2, 
+    0x2, 0x2, 0x8, 0x49, 0x3, 0x2, 0x2, 0x2, 0xa, 0x4b, 0x3, 0x2, 0x2, 0x2, 
+    0xc, 0x55, 0x3, 0x2, 0x2, 0x2, 0xe, 0x59, 0x3, 0x2, 0x2, 0x2, 0x10, 
+    0x5d, 0x3, 0x2, 0x2, 0x2, 0x12, 0x60, 0x3, 0x2, 0x2, 0x2, 0x14, 0x62, 
+    0x3, 0x2, 0x2, 0x2, 0x16, 0x67, 0x3, 0x2, 0x2, 0x2, 0x18, 0x6f, 0x3, 
+    0x2, 0x2, 0x2, 0x1a, 0x77, 0x3, 0x2, 0x2, 0x2, 0x1c, 0x79, 0x3, 0x2, 
+    0x2, 0x2, 0x1e, 0x88, 0x3, 0x2, 0x2, 0x2, 0x20, 0x9d, 0x3, 0x2, 0x2, 
+    0x2, 0x22, 0x9f, 0x3, 0x2, 0x2, 0x2, 0x24, 0xa1, 0x3, 0x2, 0x2, 0x2, 
+    0x26, 0xa3, 0x3, 0x2, 0x2, 0x2, 0x28, 0xa5, 0x3, 0x2, 0x2, 0x2, 0x2a, 
+    0xa7, 0x3, 0x2, 0x2, 0x2, 0x2c, 0xa9, 0x3, 0x2, 0x2, 0x2, 0x2e, 0x2f, 
+    0x5, 0x4, 0x3, 0x2, 0x2f, 0x30, 0x5, 0x6, 0x4, 0x2, 0x30, 0x31, 0x7, 
+    0xa, 0x2, 0x2, 0x31, 0x3, 0x3, 0x2, 0x2, 0x2, 0x32, 0x33, 0x5, 0x24, 
+    0x13, 0x2, 0x33, 0x34, 0x7, 0x8, 0x2, 0x2, 0x34, 0x3d, 0x7, 0x3, 0x2, 
+    0x2, 0x35, 0x36, 0x5, 0x24, 0x13, 0x2, 0x36, 0x37, 0x7, 0x13, 0x2, 0x2, 
+    0x37, 0x39, 0x3, 0x2, 0x2, 0x2, 0x38, 0x3a, 0x7, 0x4, 0x2, 0x2, 0x39, 
+    0x38, 0x3, 0x2, 0x2, 0x2, 0x39, 0x3a, 0x3, 0x2, 0x2, 0x2, 0x3a, 0x3c, 
+    0x3, 0x2, 0x2, 0x2, 0x3b, 0x35, 0x3, 0x2, 0x2, 0x2, 0x3c, 0x3f, 0x3, 
+    0x2, 0x2, 0x2, 0x3d, 0x3b, 0x3, 0x2, 0x2, 0x2, 0x3d, 0x3e, 0x3, 0x2, 
+    0x2, 0x2, 0x3e, 0x40, 0x3, 0x2, 0x2, 0x2, 0x3f, 0x3d, 0x3, 0x2, 0x2, 
+    0x2, 0x40, 0x41, 0x7, 0x5, 0x2, 0x2, 0x41, 0x5, 0x3, 0x2, 0x2, 0x2, 
+    0x42, 0x43, 0x5, 0x16, 0xc, 0x2, 0x43, 0x7, 0x3, 0x2, 0x2, 0x2, 0x44, 
+    0x4a, 0x5, 0xa, 0x6, 0x2, 0x45, 0x4a, 0x5, 0xc, 0x7, 0x2, 0x46, 0x4a, 
+    0x5, 0x14, 0xb, 0x2, 0x47, 0x4a, 0x5, 0xe, 0x8, 0x2, 0x48, 0x4a, 0x5, 
+    0x18, 0xd, 0x2, 0x49, 0x44, 0x3, 0x2, 0x2, 0x2, 0x49, 0x45, 0x3, 0x2, 
+    0x2, 0x2, 0x49, 0x46, 0x3, 0x2, 0x2, 0x2, 0x49, 0x47, 0x3, 0x2, 0x2, 
+    0x2, 0x49, 0x48, 0x3, 0x2, 0x2, 0x2, 0x4a, 0x9, 0x3, 0x2, 0x2, 0x2, 
+    0x4b, 0x4c, 0x7, 0xd, 0x2, 0x2, 0x4c, 0x4d, 0x7, 0x3, 0x2, 0x2, 0x4d, 
+    0x4e, 0x5, 0x1e, 0x10, 0x2, 0x4e, 0x4f, 0x7, 0x5, 0x2, 0x2, 0x4f, 0x50, 
+    0x7, 0xe, 0x2, 0x2, 0x50, 0x53, 0x5, 0x16, 0xc, 0x2, 0x51, 0x52, 0x7, 
+    0xf, 0x2, 0x2, 0x52, 0x54, 0x5, 0x16, 0xc, 0x2, 0x53, 0x51, 0x3, 0x2, 
+    0x2, 0x2, 0x53, 0x54, 0x3, 0x2, 0x2, 0x2, 0x54, 0xb, 0x3, 0x2, 0x2, 
+    0x2, 0x55, 0x56, 0x5, 0x26, 0x14, 0x2, 0x56, 0x57, 0x7, 0x1b, 0x2, 0x2, 
+    0x57, 0x58, 0x5, 0x1e, 0x10, 0x2, 0x58, 0xd, 0x3, 0x2, 0x2, 0x2, 0x59, 
+    0x5a, 0x5, 0x10, 0x9, 0x2, 0x5a, 0x5b, 0x7, 0x1b, 0x2, 0x2, 0x5b, 0x5c, 
+    0x5, 0x1e, 0x10, 0x2, 0x5c, 0xf, 0x3, 0x2, 0x2, 0x2, 0x5d, 0x5e, 0x5, 
+    0x24, 0x13, 0x2, 0x5e, 0x5f, 0x5, 0x12, 0xa, 0x2, 0x5f, 0x11, 0x3, 0x2, 
+    0x2, 0x2, 0x60, 0x61, 0x7, 0x13, 0x2, 0x2, 0x61, 0x13, 0x3, 0x2, 0x2, 
+    0x2, 0x62, 0x63, 0x7, 0xb, 0x2, 0x2, 0x63, 0x64, 0x5, 0x16, 0xc, 0x2, 
+    0x64, 0x65, 0x7, 0xc, 0x2, 0x2, 0x65, 0x66, 0x5, 0x1e, 0x10, 0x2, 0x66, 
+    0x15, 0x3, 0x2, 0x2, 0x2, 0x67, 0x6c, 0x5, 0x8, 0x5, 0x2, 0x68, 0x69, 
+    0x7, 0x6, 0x2, 0x2, 0x69, 0x6b, 0x5, 0x8, 0x5, 0x2, 0x6a, 0x68, 0x3, 
+    0x2, 0x2, 0x2, 0x6b, 0x6e, 0x3, 0x2, 0x2, 0x2, 0x6c, 0x6a, 0x3, 0x2, 
+    0x2, 0x2, 0x6c, 0x6d, 0x3, 0x2, 0x2, 0x2, 0x6d, 0x17, 0x3, 0x2, 0x2, 
+    0x2, 0x6e, 0x6c, 0x3, 0x2, 0x2, 0x2, 0x6f, 0x70, 0x7, 0x12, 0x2, 0x2, 
+    0x70, 0x71, 0x7, 0x3, 0x2, 0x2, 0x71, 0x72, 0x5, 0x1a, 0xe, 0x2, 0x72, 
+    0x73, 0x7, 0x5, 0x2, 0x2, 0x73, 0x74, 0x7, 0x7, 0x2, 0x2, 0x74, 0x19, 
+    0x3, 0x2, 0x2, 0x2, 0x75, 0x78, 0x5, 0x1e, 0x10, 0x2, 0x76, 0x78, 0x5, 
+    0x22, 0x12, 0x2, 0x77, 0x75, 0x3, 0x2, 0x2, 0x2, 0x77, 0x76, 0x3, 0x2, 
+    0x2, 0x2, 0x78, 0x1b, 0x3, 0x2, 0x2, 0x2, 0x79, 0x7e, 0x5, 0x1e, 0x10, 
+    0x2, 0x7a, 0x7b, 0x7, 0x4, 0x2, 0x2, 0x7b, 0x7d, 0x5, 0x1e, 0x10, 0x2, 
+    0x7c, 0x7a, 0x3, 0x2, 0x2, 0x2, 0x7d, 0x80, 0x3, 0x2, 0x2, 0x2, 0x7e, 
+    0x7c, 0x3, 0x2, 0x2, 0x2, 0x7e, 0x7f, 0x3, 0x2, 0x2, 0x2, 0x7f, 0x1d, 
+    0x3, 0x2, 0x2, 0x2, 0x80, 0x7e, 0x3, 0x2, 0x2, 0x2, 0x81, 0x82, 0x8, 
+    0x10, 0x1, 0x2, 0x82, 0x89, 0x5, 0x26, 0x14, 0x2, 0x83, 0x89, 0x5, 0x20, 
+    0x11, 0x2, 0x84, 0x85, 0x7, 0x3, 0x2, 0x2, 0x85, 0x86, 0x5, 0x1e, 0x10, 
+    0x2, 0x86, 0x87, 0x7, 0x5, 0x2, 0x2, 0x87, 0x89, 0x3, 0x2, 0x2, 0x2, 
+    0x88, 0x81, 0x3, 0x2, 0x2, 0x2, 0x88, 0x83, 0x3, 0x2, 0x2, 0x2, 0x88, 
+    0x84, 0x3, 0x2, 0x2, 0x2, 0x89, 0x98, 0x3, 0x2, 0x2, 0x2, 0x8a, 0x8b, 
+    0xc, 0x8, 0x2, 0x2, 0x8b, 0x8c, 0x5, 0x28, 0x15, 0x2, 0x8c, 0x8d, 0x5, 
+    0x1e, 0x10, 0x9, 0x8d, 0x97, 0x3, 0x2, 0x2, 0x2, 0x8e, 0x8f, 0xc, 0x7, 
+    0x2, 0x2, 0x8f, 0x90, 0x5, 0x2a, 0x16, 0x2, 0x90, 0x91, 0x5, 0x1e, 0x10, 
+    0x8, 0x91, 0x97, 0x3, 0x2, 0x2, 0x2, 0x92, 0x93, 0xc, 0x6, 0x2, 0x2, 
+    0x93, 0x94, 0x5, 0x2c, 0x17, 0x2, 0x94, 0x95, 0x5, 0x1e, 0x10, 0x7, 
+    0x95, 0x97, 0x3, 0x2, 0x2, 0x2, 0x96, 0x8a, 0x3, 0x2, 0x2, 0x2, 0x96, 
+    0x8e, 0x3, 0x2, 0x2, 0x2, 0x96, 0x92, 0x3, 0x2, 0x2, 0x2, 0x97, 0x9a, 
+    0x3, 0x2, 0x2, 0x2, 0x98, 0x96, 0x3, 0x2, 0x2, 0x2, 0x98, 0x99, 0x3, 
+    0x2, 0x2, 0x2, 0x99, 0x1f, 0x3, 0x2, 0x2, 0x2, 0x9a, 0x98, 0x3, 0x2, 
+    0x2, 0x2, 0x9b, 0x9e, 0x7, 0x14, 0x2, 0x2, 0x9c, 0x9e, 0x7, 0x15, 0x2, 
+    0x2, 0x9d, 0x9b, 0x3, 0x2, 0x2, 0x2, 0x9d, 0x9c, 0x3, 0x2, 0x2, 0x2, 
+    0x9e, 0x21, 0x3, 0x2, 0x2, 0x2, 0x9f, 0xa0, 0x7, 0x16, 0x2, 0x2, 0xa0, 
+    0x23, 0x3, 0x2, 0x2, 0x2, 0xa1, 0xa2, 0x9, 0x2, 0x2, 0x2, 0xa2, 0x25, 
+    0x3, 0x2, 0x2, 0x2, 0xa3, 0xa4, 0x7, 0x13, 0x2, 0x2, 0xa4, 0x27, 0x3, 
+    0x2, 0x2, 0x2, 0xa5, 0xa6, 0x9, 0x3, 0x2, 0x2, 0xa6, 0x29, 0x3, 0x2, 
+    0x2, 0x2, 0xa7, 0xa8, 0x9, 0x4, 0x2, 0x2, 0xa8, 0x2b, 0x3, 0x2, 0x2, 
+    0x2, 0xa9, 0xaa, 0x9, 0x5, 0x2, 0x2, 0xaa, 0x2d, 0x3, 0x2, 0x2, 0x2, 
+    0xd, 0x39, 0x3d, 0x49, 0x53, 0x6c, 0x77, 0x7e, 0x88, 0x96, 0x98, 0x9d, 
   };
 
   atn::ATNDeserializer deserializer;

@@ -23,19 +23,15 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIfStmt(MixedDrinksParser::IfStmtContext *ctx) override {
+  virtual antlrcpp::Any visitMain(MixedDrinksParser::MainContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAssignmentStmt(MixedDrinksParser::AssignmentStmtContext *ctx) override {
+  virtual antlrcpp::Any visitBlock(MixedDrinksParser::BlockContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitRepeatStmt(MixedDrinksParser::RepeatStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitDeclareStmt(MixedDrinksParser::DeclareStmtContext *ctx) override {
+  virtual antlrcpp::Any visitStmt(MixedDrinksParser::StmtContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -55,15 +51,31 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitChug_stmt(MixedDrinksParser::Chug_stmtContext *ctx) override {
+  virtual antlrcpp::Any visitVariable_ID(MixedDrinksParser::Variable_IDContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitStmt_list(MixedDrinksParser::Stmt_listContext *ctx) override {
+  virtual antlrcpp::Any visitRepeat_statement(MixedDrinksParser::Repeat_statementContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIdentifier(MixedDrinksParser::IdentifierContext *ctx) override {
+  virtual antlrcpp::Any visitStatement_list(MixedDrinksParser::Statement_listContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitPrint_statement(MixedDrinksParser::Print_statementContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitOutput(MixedDrinksParser::OutputContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitIdentifiers(MixedDrinksParser::IdentifiersContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitDrinkExpression(MixedDrinksParser::DrinkExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -75,7 +87,7 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitInteger(MixedDrinksParser::IntegerContext *ctx) override {
+  virtual antlrcpp::Any visitNumberExpression(MixedDrinksParser::NumberExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -87,15 +99,23 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitInteger_constant(MixedDrinksParser::Integer_constantContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitCharacter_constant(MixedDrinksParser::Character_constantContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitDrinkNames(MixedDrinksParser::DrinkNamesContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitTypeID(MixedDrinksParser::TypeIDContext *ctx) override {
     return visitChildren(ctx);
   }
 
   virtual antlrcpp::Any visitDrink(MixedDrinksParser::DrinkContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitShots(MixedDrinksParser::ShotsContext *ctx) override {
     return visitChildren(ctx);
   }
 

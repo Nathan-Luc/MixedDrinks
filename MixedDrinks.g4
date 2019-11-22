@@ -5,56 +5,85 @@ grammar MixedDrinks;
 using namespace wci::intermediate;
 }
 
-prog:   stmt+ ; 
+prog:   main block END ; 
 
-stmt: 		if_stmt			#ifStmt
-	|	assignment_stmt 	#assignmentStmt
-	| 	chug_stmt    		#repeatStmt
-	|	declaration_stmt	#declareStmt
+main 	: typeID MIXED_DRINKS '(' ((typeID IDENTIFIER) ','?)* ')';
+
+block	: statement_list ;
+
+stmt: 		if_stmt			
+	|		assignment_stmt 
+	| 		repeat_statement    		
+	|		declaration_stmt
+	|		print_statement
 	;
 
-if_stmt         	: DRUNK '(' expr ')' THEN stmt (SOBER stmt )? ;
+/* CONDITIONAL STATEMENT */
+if_stmt         	: IF '(' expr ')' THEN (statement_list (ELSE statement_list )?) ;
+
+/* Assignment and Declarations */
 assignment_stmt 	: drink '=' expr ;
 declaration_stmt	: declaration '=' expr;
-declaration	:typeID drink;
-chug_stmt     		: CHUG expr UNTIL expr;
+declaration			: typeID variable_ID;
 
-stmt_list       : stmt ( ';' stmt )*;
+variable_ID locals [ TypeSpec *type = nullptr ] : IDENTIFIER ;
 
+/* LOOP STATEMENT */
+repeat_statement     : REPEAT statement_list UNTIL expr;
+
+statement_list       : stmt ( ';' stmt )*;
+
+print_statement : PRINT '(' output ')' '.' ;
+output : expr | drinkNames ;
+
+/* CHANGE THIS BELOW!!! */
+identifiers : expr (',' expr)* ;
 
 expr locals [ TypeSpec *type = nullptr ]
-	:		expr mul_div_op expr	# mulDivExpr
+	:	expr mul_div_op expr	# mulDivExpr
 	|	expr add_sub_op expr	# addSubExpr
 	| 	expr rel_op expr     	# relExpr
-	|	drink				# identifier
-	|	shots				# integer
+	|	drink					# drinkExpression
+	|	number					# numberExpression
 	| 	'(' expr ')'         	# parens
 	;
 
-typeID :IDENTIFIER
-	   | BEER
-	   | SPRITS
+/* CHANGE THIS BELOW!!! */
+number locals [ TypeSpec *type = nullptr ]
+	: INTEGER 	#integer_constant
+	| CHARACTER	#character_constant
+	;
+
+/* CHANGE THIS BELOW!!! */
+drinkNames locals [ TypeSpec *type = nullptr ] : STRING ;
+
+typeID : IDENTIFIER
+	   | CHARACTER
+	   | INTEGER
 	   ; 
 
-drink : IDENTIFIER ;  
-shots : INTEGER ;
+drink : IDENTIFIER ;
 
 mul_div_op : MUL_OP | DIV_OP ;
 add_sub_op : ADD_OP | SUB_OP ;
 rel_op     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ;
 
-CHUG    : 'CHUG' ;
-UNTIL   : 'UNTIL' ;
-DRUNK   : 'DRUNK' ;
-THEN    : 'THEN' ;
-SOBER    : 'SOBER';
-BEER	:  'BEER' ;
-SPRITS	: 'SPRITS';
+MIXED_DRINKS		: 'MIXED_DRINKS' ;
+BEGIN				: 'START' ;
+END					: 'STOP' ;
+REPEAT  			: 'CHUG' ;
+UNTIL   			: 'UNTIL' ;
+IF		    		: 'DRUNK' ;
+THEN    			: 'DO' ;
+ELSE    			: 'SOBER';
+INTEGER_TYPE		: 'SHOTS' ;
+CHARACTER_TYPE		: 'SPRITS';
+PRINT				: 'SPILL' ;
 
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9]* ;
 INTEGER    : [0-9]+ ;
-
-
+CHARACTER  : '\''[a-zA-Z0-9]'\'' ;
+STRING	   : '"' (IDENTIFIER | ' ')*? '"' ;
 
 MUL_OP :   '*' ;
 DIV_OP :   '/' ;

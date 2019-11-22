@@ -16,10 +16,12 @@ using namespace wci::intermediate;
 class  MixedDrinksLexer : public antlr4::Lexer {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, CHUG = 4, UNTIL = 5, DRUNK = 6, THEN = 7, 
-    SOBER = 8, BEER = 9, SPRITS = 10, IDENTIFIER = 11, INTEGER = 12, MUL_OP = 13, 
-    DIV_OP = 14, ADD_OP = 15, SUB_OP = 16, EQ_OP = 17, NE_OP = 18, LT_OP = 19, 
-    LE_OP = 20, GT_OP = 21, GE_OP = 22, NEWLINE = 23, WS = 24
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, MIXED_DRINKS = 6, 
+    BEGIN = 7, END = 8, REPEAT = 9, UNTIL = 10, IF = 11, THEN = 12, ELSE = 13, 
+    INTEGER_TYPE = 14, CHARACTER_TYPE = 15, PRINT = 16, IDENTIFIER = 17, 
+    INTEGER = 18, CHARACTER = 19, STRING = 20, MUL_OP = 21, DIV_OP = 22, 
+    ADD_OP = 23, SUB_OP = 24, EQ_OP = 25, NE_OP = 26, LT_OP = 27, LE_OP = 28, 
+    GT_OP = 29, GE_OP = 30, NEWLINE = 31, WS = 32
   };
 
   MixedDrinksLexer(antlr4::CharStream *input);

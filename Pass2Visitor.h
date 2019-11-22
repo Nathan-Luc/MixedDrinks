@@ -24,26 +24,23 @@ private:
 public:
 	Pass2Visitor(ostream& j_file);
     virtual ~Pass2Visitor();
-	
-	antlrcpp::Any visitProg(MixedDrinksParser::ProgContext *ctx) override;
-	antlrcpp::Any visitAssignment_stmt(MixedDrinksParser::Assignment_stmtContext *ctx) override;
-	antlrcpp::Any visitRepeatStmt(MixedDrinksParser::RepeatStmtContext *ctx) override;
-	antlrcpp::Any visitDeclaration_stmt(MixedDrinksParser::Declaration_stmtContext *ctx) override;
-	antlrcpp::Any visitStmt_list(MixedDrinksParser::Stmt_listContext *ctx) override;
-	antlrcpp::Any visitIdentifier(MixedDrinksParser::IdentifierContext *ctx) override;
-	antlrcpp::Any visitParens(MixedDrinksParser::ParensContext *ctx) override;
-	antlrcpp::Any visitAddSubExpr(MixedDrinksParser::AddSubExprContext *ctx) override;
-	antlrcpp::Any visitInteger(MixedDrinksParser::IntegerContext *ctx) override;
-	antlrcpp::Any visitRelExpr(MixedDrinksParser::RelExprContext *ctx) override;
-	antlrcpp::Any visitMulDivExpr(MixedDrinksParser::MulDivExprContext *ctx) override;
-	antlrcpp::Any visitTypeID(MixedDrinksParser::TypeIDContext *ctx) override;
-	antlrcpp::Any visitMul_div_op(MixedDrinksParser::Mul_div_opContext *ctx) override;
-	antlrcpp::Any visitAdd_sub_op(MixedDrinksParser::Add_sub_opContext *ctx) override;
-	antlrcpp::Any visitRel_op(MixedDrinksParser::Rel_opContext *ctx) override;
-	
-	antlrcpp::Any visitIf_stmt(MixedDrinksParser::If_stmtContext *ctx) override;
-	antlrcpp::Any visitChug_stmt(MixedDrinksParser::Chug_stmtContext *ctx) override;
-	antlrcpp::Any visitDrink(MixedDrinksParser::DrinkContext *ctx) override;
-	antlrcpp::Any visitShots(MixedDrinksParser::ShotsContext *ctx) override;
+
+    antlrcpp::Any visitProg(MixedDrinksParser::ProgContext *ctx) override;
+    antlrcpp::Any visitBlock(MixedDrinksParser::BlockContext *ctx) override;
+    antlrcpp::Any visitStmt(MixedDrinksParser::StmtContext *ctx) override;
+    antlrcpp::Any visitDeclaration_stmt(MixedDrinksParser::Declaration_stmtContext *ctx) override;
+    antlrcpp::Any visitAssignment_stmt(MixedDrinksParser::Assignment_stmtContext *ctx) override;
+    antlrcpp::Any visitAddSubExpr(MixedDrinksParser::AddSubExprContext *ctx) override;
+    antlrcpp::Any visitMulDivExpr(MixedDrinksParser::MulDivExprContext *ctx) override;
+    antlrcpp::Any visitDrinkExpression(MixedDrinksParser::DrinkExpressionContext *ctx) override;
+    antlrcpp::Any visitInteger_constant(MixedDrinksParser::Integer_constantContext *ctx) override;
+    antlrcpp::Any visitCharacter_constant(MixedDrinksParser::Character_constantContext *ctx) override;
+
+    // User added override functions
+    antlrcpp::Any visitPrint_statement(MixedDrinksParser::Print_statementContext *ctx) override;
+    antlrcpp::Any visitDrinkNames(MixedDrinksParser::DrinkNamesContext *ctx) override;
+    antlrcpp::Any visitRepeat_statement(MixedDrinksParser::Repeat_statementContext *ctx) override;
+    antlrcpp::Any visitIf_stmt(MixedDrinksParser::If_stmtContext *ctx) override;
+    antlrcpp::Any visitRelExpr(MixedDrinksParser::RelExprContext *ctx) override;
 };
 #endif /* PASS2VISITOR_H_ */

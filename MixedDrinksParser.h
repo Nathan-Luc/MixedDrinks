@@ -16,17 +16,21 @@ using namespace wci::intermediate;
 class  MixedDrinksParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, CHUG = 4, UNTIL = 5, DRUNK = 6, THEN = 7, 
-    SOBER = 8, BEER = 9, SPRITS = 10, IDENTIFIER = 11, INTEGER = 12, MUL_OP = 13, 
-    DIV_OP = 14, ADD_OP = 15, SUB_OP = 16, EQ_OP = 17, NE_OP = 18, LT_OP = 19, 
-    LE_OP = 20, GT_OP = 21, GE_OP = 22, NEWLINE = 23, WS = 24
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, MIXED_DRINKS = 6, 
+    BEGIN = 7, END = 8, REPEAT = 9, UNTIL = 10, IF = 11, THEN = 12, ELSE = 13, 
+    INTEGER_TYPE = 14, CHARACTER_TYPE = 15, PRINT = 16, IDENTIFIER = 17, 
+    INTEGER = 18, CHARACTER = 19, STRING = 20, MUL_OP = 21, DIV_OP = 22, 
+    ADD_OP = 23, SUB_OP = 24, EQ_OP = 25, NE_OP = 26, LT_OP = 27, LE_OP = 28, 
+    GT_OP = 29, GE_OP = 30, NEWLINE = 31, WS = 32
   };
 
   enum {
-    RuleProg = 0, RuleStmt = 1, RuleIf_stmt = 2, RuleAssignment_stmt = 3, 
-    RuleDeclaration_stmt = 4, RuleDeclaration = 5, RuleChug_stmt = 6, RuleStmt_list = 7, 
-    RuleExpr = 8, RuleTypeID = 9, RuleDrink = 10, RuleShots = 11, RuleMul_div_op = 12, 
-    RuleAdd_sub_op = 13, RuleRel_op = 14
+    RuleProg = 0, RuleMain = 1, RuleBlock = 2, RuleStmt = 3, RuleIf_stmt = 4, 
+    RuleAssignment_stmt = 5, RuleDeclaration_stmt = 6, RuleDeclaration = 7, 
+    RuleVariable_ID = 8, RuleRepeat_statement = 9, RuleStatement_list = 10, 
+    RulePrint_statement = 11, RuleOutput = 12, RuleIdentifiers = 13, RuleExpr = 14, 
+    RuleNumber = 15, RuleDrinkNames = 16, RuleTypeID = 17, RuleDrink = 18, 
+    RuleMul_div_op = 19, RuleAdd_sub_op = 20, RuleRel_op = 21
   };
 
   MixedDrinksParser(antlr4::TokenStream *input);
@@ -40,17 +44,24 @@ public:
 
 
   class ProgContext;
+  class MainContext;
+  class BlockContext;
   class StmtContext;
   class If_stmtContext;
   class Assignment_stmtContext;
   class Declaration_stmtContext;
   class DeclarationContext;
-  class Chug_stmtContext;
-  class Stmt_listContext;
+  class Variable_IDContext;
+  class Repeat_statementContext;
+  class Statement_listContext;
+  class Print_statementContext;
+  class OutputContext;
+  class IdentifiersContext;
   class ExprContext;
+  class NumberContext;
+  class DrinkNamesContext;
   class TypeIDContext;
   class DrinkContext;
-  class ShotsContext;
   class Mul_div_opContext;
   class Add_sub_opContext;
   class Rel_opContext; 
@@ -59,8 +70,9 @@ public:
   public:
     ProgContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<StmtContext *> stmt();
-    StmtContext* stmt(size_t i);
+    MainContext *main();
+    BlockContext *block();
+    antlr4::tree::TerminalNode *END();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
@@ -68,49 +80,46 @@ public:
 
   ProgContext* prog();
 
+  class  MainContext : public antlr4::ParserRuleContext {
+  public:
+    MainContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<TypeIDContext *> typeID();
+    TypeIDContext* typeID(size_t i);
+    antlr4::tree::TerminalNode *MIXED_DRINKS();
+    std::vector<antlr4::tree::TerminalNode *> IDENTIFIER();
+    antlr4::tree::TerminalNode* IDENTIFIER(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  MainContext* main();
+
+  class  BlockContext : public antlr4::ParserRuleContext {
+  public:
+    BlockContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    Statement_listContext *statement_list();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  BlockContext* block();
+
   class  StmtContext : public antlr4::ParserRuleContext {
   public:
     StmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-   
-    StmtContext() = default;
-    void copyFrom(StmtContext *context);
-    using antlr4::ParserRuleContext::copyFrom;
-
     virtual size_t getRuleIndex() const override;
-
-   
-  };
-
-  class  DeclareStmtContext : public StmtContext {
-  public:
-    DeclareStmtContext(StmtContext *ctx);
-
-    Declaration_stmtContext *declaration_stmt();
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  IfStmtContext : public StmtContext {
-  public:
-    IfStmtContext(StmtContext *ctx);
-
     If_stmtContext *if_stmt();
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  AssignmentStmtContext : public StmtContext {
-  public:
-    AssignmentStmtContext(StmtContext *ctx);
-
     Assignment_stmtContext *assignment_stmt();
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
+    Repeat_statementContext *repeat_statement();
+    Declaration_stmtContext *declaration_stmt();
+    Print_statementContext *print_statement();
 
-  class  RepeatStmtContext : public StmtContext {
-  public:
-    RepeatStmtContext(StmtContext *ctx);
-
-    Chug_stmtContext *chug_stmt();
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
   };
 
   StmtContext* stmt();
@@ -119,12 +128,12 @@ public:
   public:
     If_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *DRUNK();
+    antlr4::tree::TerminalNode *IF();
     ExprContext *expr();
     antlr4::tree::TerminalNode *THEN();
-    std::vector<StmtContext *> stmt();
-    StmtContext* stmt(size_t i);
-    antlr4::tree::TerminalNode *SOBER();
+    std::vector<Statement_listContext *> statement_list();
+    Statement_listContext* statement_list(size_t i);
+    antlr4::tree::TerminalNode *ELSE();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
@@ -165,7 +174,7 @@ public:
     DeclarationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     TypeIDContext *typeID();
-    DrinkContext *drink();
+    Variable_IDContext *variable_ID();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
@@ -173,24 +182,37 @@ public:
 
   DeclarationContext* declaration();
 
-  class  Chug_stmtContext : public antlr4::ParserRuleContext {
+  class  Variable_IDContext : public antlr4::ParserRuleContext {
   public:
-    Chug_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    TypeSpec * type = nullptr;
+    Variable_IDContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *CHUG();
-    std::vector<ExprContext *> expr();
-    ExprContext* expr(size_t i);
-    antlr4::tree::TerminalNode *UNTIL();
+    antlr4::tree::TerminalNode *IDENTIFIER();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
   };
 
-  Chug_stmtContext* chug_stmt();
+  Variable_IDContext* variable_ID();
 
-  class  Stmt_listContext : public antlr4::ParserRuleContext {
+  class  Repeat_statementContext : public antlr4::ParserRuleContext {
   public:
-    Stmt_listContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    Repeat_statementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *REPEAT();
+    Statement_listContext *statement_list();
+    antlr4::tree::TerminalNode *UNTIL();
+    ExprContext *expr();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Repeat_statementContext* repeat_statement();
+
+  class  Statement_listContext : public antlr4::ParserRuleContext {
+  public:
+    Statement_listContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<StmtContext *> stmt();
     StmtContext* stmt(size_t i);
@@ -199,7 +221,46 @@ public:
    
   };
 
-  Stmt_listContext* stmt_list();
+  Statement_listContext* statement_list();
+
+  class  Print_statementContext : public antlr4::ParserRuleContext {
+  public:
+    Print_statementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *PRINT();
+    OutputContext *output();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Print_statementContext* print_statement();
+
+  class  OutputContext : public antlr4::ParserRuleContext {
+  public:
+    OutputContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    ExprContext *expr();
+    DrinkNamesContext *drinkNames();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  OutputContext* output();
+
+  class  IdentifiersContext : public antlr4::ParserRuleContext {
+  public:
+    IdentifiersContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  IdentifiersContext* identifiers();
 
   class  ExprContext : public antlr4::ParserRuleContext {
   public:
@@ -215,9 +276,9 @@ public:
    
   };
 
-  class  IdentifierContext : public ExprContext {
+  class  DrinkExpressionContext : public ExprContext {
   public:
-    IdentifierContext(ExprContext *ctx);
+    DrinkExpressionContext(ExprContext *ctx);
 
     DrinkContext *drink();
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -241,11 +302,11 @@ public:
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
   };
 
-  class  IntegerContext : public ExprContext {
+  class  NumberExpressionContext : public ExprContext {
   public:
-    IntegerContext(ExprContext *ctx);
+    NumberExpressionContext(ExprContext *ctx);
 
-    ShotsContext *shots();
+    NumberContext *number();
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
   };
 
@@ -271,13 +332,58 @@ public:
 
   ExprContext* expr();
   ExprContext* expr(int precedence);
+  class  NumberContext : public antlr4::ParserRuleContext {
+  public:
+    TypeSpec * type = nullptr;
+    NumberContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+   
+    NumberContext() = default;
+    void copyFrom(NumberContext *context);
+    using antlr4::ParserRuleContext::copyFrom;
+
+    virtual size_t getRuleIndex() const override;
+
+   
+  };
+
+  class  Integer_constantContext : public NumberContext {
+  public:
+    Integer_constantContext(NumberContext *ctx);
+
+    antlr4::tree::TerminalNode *INTEGER();
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  Character_constantContext : public NumberContext {
+  public:
+    Character_constantContext(NumberContext *ctx);
+
+    antlr4::tree::TerminalNode *CHARACTER();
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  NumberContext* number();
+
+  class  DrinkNamesContext : public antlr4::ParserRuleContext {
+  public:
+    TypeSpec * type = nullptr;
+    DrinkNamesContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *STRING();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  DrinkNamesContext* drinkNames();
+
   class  TypeIDContext : public antlr4::ParserRuleContext {
   public:
     TypeIDContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *IDENTIFIER();
-    antlr4::tree::TerminalNode *BEER();
-    antlr4::tree::TerminalNode *SPRITS();
+    antlr4::tree::TerminalNode *CHARACTER();
+    antlr4::tree::TerminalNode *INTEGER();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
@@ -296,18 +402,6 @@ public:
   };
 
   DrinkContext* drink();
-
-  class  ShotsContext : public antlr4::ParserRuleContext {
-  public:
-    ShotsContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *INTEGER();
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  ShotsContext* shots();
 
   class  Mul_div_opContext : public antlr4::ParserRuleContext {
   public:

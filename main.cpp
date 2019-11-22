@@ -21,8 +21,8 @@ int main(int argsc, char * argv[])
     CommonTokenStream tokens(&lexer);
  
  
-	MixedDrinksLexer parser(&tokens);
-	tree::ParseTree *tree = parser.program();
+	MixedDrinksParser parser(&tokens);
+	tree::ParseTree *tree = parser.prog();
 	
 	Pass1Visitor *pass1 = new Pass1Visitor();
 	pass1->visit(tree);
