@@ -16,12 +16,12 @@ using namespace wci::intermediate;
 class  MixedDrinksParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, MIXED_DRINKS = 6, 
-    BEGIN = 7, END = 8, REPEAT = 9, UNTIL = 10, IF = 11, THEN = 12, ELSE = 13, 
-    INTEGER_TYPE = 14, CHARACTER_TYPE = 15, PRINT = 16, IDENTIFIER = 17, 
-    INTEGER = 18, CHARACTER = 19, STRING = 20, MUL_OP = 21, DIV_OP = 22, 
-    ADD_OP = 23, SUB_OP = 24, EQ_OP = 25, NE_OP = 26, LT_OP = 27, LE_OP = 28, 
-    GT_OP = 29, GE_OP = 30, NEWLINE = 31, WS = 32
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, MIXED_DRINKS = 5, BEGIN = 6, 
+    END = 7, REPEAT = 8, UNTIL = 9, IF = 10, THEN = 11, ELSE = 12, INT = 13, 
+    CHAR = 14, PRINT = 15, IDENTIFIER = 16, INTEGER = 17, CHARACTER = 18, 
+    STRING = 19, MUL_OP = 20, DIV_OP = 21, ADD_OP = 22, SUB_OP = 23, EQ_OP = 24, 
+    NE_OP = 25, LT_OP = 26, LE_OP = 27, GT_OP = 28, GE_OP = 29, NEWLINE = 30, 
+    WS = 31
   };
 
   enum {
@@ -382,8 +382,8 @@ public:
     TypeIDContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *IDENTIFIER();
-    antlr4::tree::TerminalNode *CHARACTER();
-    antlr4::tree::TerminalNode *INTEGER();
+    antlr4::tree::TerminalNode *CHAR();
+    antlr4::tree::TerminalNode *INT();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    

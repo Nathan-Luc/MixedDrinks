@@ -31,7 +31,7 @@ variable_ID locals [ TypeSpec *type = nullptr ] : IDENTIFIER ;
 /* LOOP STATEMENT */
 repeat_statement     : REPEAT statement_list UNTIL expr;
 
-statement_list       : stmt ( ';' stmt )*;
+statement_list       : stmt+ ;
 
 print_statement : PRINT '(' output ')' '.' ;
 output : expr | drinkNames ;
@@ -58,8 +58,8 @@ number locals [ TypeSpec *type = nullptr ]
 drinkNames locals [ TypeSpec *type = nullptr ] : STRING ;
 
 typeID : IDENTIFIER
-	   | CHARACTER
-	   | INTEGER
+	   | CHAR
+	   | INT
 	   ; 
 
 drink : IDENTIFIER ;
@@ -76,8 +76,8 @@ UNTIL   			: 'UNTIL' ;
 IF		    		: 'DRUNK' ;
 THEN    			: 'DO' ;
 ELSE    			: 'SOBER';
-INTEGER_TYPE		: 'SHOTS' ;
-CHARACTER_TYPE		: 'SPRITS';
+INT					: 'SHOTS' ;
+CHAR				: 'SPRITS';
 PRINT				: 'SPILL' ;
 
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9]* ;
