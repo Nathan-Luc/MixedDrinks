@@ -25,7 +25,7 @@ Pass2Visitor::~Pass2Visitor() {}
 
 antlrcpp::Any Pass2Visitor::visitProg(MixedDrinksParser::ProgContext *ctx)
 {
-	program_name = "Munchies";
+	program_name = "MixedDrinks";
 	// Emit the main program header.
 
 	j_file << endl;
@@ -151,7 +151,6 @@ antlrcpp::Any Pass2Visitor::visitAddSubExpr(MixedDrinksParser::AddSubExprContext
 
 	bool integer_mode_boolean = false;
 	if (integer_mode){
-		cout << "integer_mode not false" << endl;
 		integer_mode_boolean = false;
 	}
 	else{

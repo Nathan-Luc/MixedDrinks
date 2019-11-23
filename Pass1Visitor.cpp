@@ -110,12 +110,12 @@ antlrcpp::Any Pass1Visitor::visitDeclaration(MixedDrinksParser::DeclarationConte
     TypeSpec *type;
     string type_indicator;
     string type_name = ctx->typeID()->getText();
-    if (type_name=="int")
+    if (type_name=="SHOTS")
     {
         type = Predefined::integer_type;
         type_indicator = "I";
     }
-    else if (type_name=="char")
+    else if (type_name=="SPRITS")
     {
         type = Predefined::char_type;
         type_indicator = "C";
@@ -158,10 +158,6 @@ antlrcpp::Any Pass1Visitor::visitAddSubExpr(MixedDrinksParser::AddSubExprContext
 
 antlrcpp::Any Pass1Visitor::visitMulDivExpr(MixedDrinksParser::MulDivExprContext *ctx)
 {
-    cout << "--> in Multiply/Divide(): " + ctx->getText() << endl;
-    if (func_id == "Ron Mak") {
-    	cout << "Congrats! You found the easter egg!" << endl;
-    }
     auto value = visitChildren(ctx);
 
     TypeSpec *type1 = ctx->expr(0)->type;

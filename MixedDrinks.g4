@@ -11,7 +11,9 @@ main 	: typeID MIXED_DRINKS '(' ((typeID IDENTIFIER) ','?)* ')';
 
 block	: statement_list ;
 
-stmt: 		if_stmt			
+stmt: 		(assignment_stmt '~')
+	|		(declaration_stmt '~')
+	|		if_stmt			
 	|		assignment_stmt 
 	| 		repeat_statement    		
 	|		declaration_stmt
@@ -19,7 +21,7 @@ stmt: 		if_stmt
 	;
 
 /* CONDITIONAL STATEMENT */
-if_stmt         	: IF '(' expr ')' THEN (statement_list (ELSE statement_list )?) ;
+if_stmt         	: IF '(' expr ')' THEN '{' (statement_list '}' (ELSE statement_list )?) ;
 
 /* Assignment and Declarations */
 assignment_stmt 	: drink '=' expr ;
@@ -29,11 +31,11 @@ declaration			: typeID variable_ID;
 variable_ID locals [ TypeSpec *type = nullptr ] : IDENTIFIER ;
 
 /* LOOP STATEMENT */
-repeat_statement     : REPEAT statement_list UNTIL expr;
+repeat_statement     : REPEAT '{' statement_list '}' UNTIL expr '~';
 
 statement_list       : stmt+ ;
 
-print_statement : PRINT '(' output ')' '.' ;
+print_statement : PRINT '(' output ')' '~' ;
 output : expr | drinkNames ;
 
 /* CHANGE THIS BELOW!!! */

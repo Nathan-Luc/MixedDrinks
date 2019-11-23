@@ -1,6 +1,11 @@
 SHOTS MIXED_DRINKS ()
 
-	SHOTS jesse = 3
-	SHOTS nick = 5
+	SHOTS Jess = 100~	
 
+	CHUG
+	{
+		Jess = 100 + 100
+	}
+	UNTIL Jess = 1000~
+	SPILL(Jess)~
 STOP
