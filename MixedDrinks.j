@@ -8,6 +8,10 @@
 
 .field private static Jess I
 
+; SPRITSNathan
+
+.field private static Nathan C
+
 .method public <init>()V
 
 	aload_0
@@ -29,24 +33,35 @@
 	invokenonvirtual PascalTextIn/<init>()V
 	putstatic        MixedDrinks/_standardIn LPascalTextIn;
 
-; SHOTSJess=100~
+; SHOTSJess=1000~
 
-	ldc	100
+	ldc	1000
 	putstatic	MixedDrinks/Jess I
 
-; CHUG{Jess=100+100}UNTILJess=1000~
+; SPRITSNathan='H'~
+
+	ldc	72
+	putstatic	MixedDrinks/Nathan C
+
+; DRUNK(Jess=1000)DO{Jess=10000~}SOBER{Jess=1000~}
 
 Label_0:
-
-; Jess=100+100
-
-	ldc	100
-	ldc	100
-	iadd
-	putstatic	MixedDrinks/Jess I
 	getstatic	MixedDrinks/Jess I
 	ldc	1000
-	if_icmpeq Label_0
+	if_icmpeq Label_1
+
+; Jess=1000~
+
+	ldc	1000
+	putstatic	MixedDrinks/Jess I
+	goto Label_2
+Label_1:
+
+; Jess=10000~
+
+	ldc	10000
+	putstatic	MixedDrinks/Jess I
+Label_2:
 
 ; SPILL(Jess)~
 

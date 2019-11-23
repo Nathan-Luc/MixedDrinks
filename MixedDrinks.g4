@@ -21,7 +21,7 @@ stmt: 		(assignment_stmt '~')
 	;
 
 /* CONDITIONAL STATEMENT */
-if_stmt         	: IF '(' expr ')' THEN '{' (statement_list '}' (ELSE statement_list )?) ;
+if_stmt         	: IF '(' expr ')' THEN '{' (statement_list '}'(ELSE '{' statement_list '}' )?) ;
 
 /* Assignment and Declarations */
 assignment_stmt 	: drink '=' expr ;
