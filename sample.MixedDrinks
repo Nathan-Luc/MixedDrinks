@@ -1,17 +1,25 @@
 SHOTS MIXED_DRINKS ()
 
-	SHOTS Jess = 1000~	
-	SPRITS Nathan = 'H' ~
-	DRUNK(Jess = 1000)
+	SHOTS Jesse = 1001~
+	DRUNK(Jesse = 1000)
 	DO
 	{
-		Jess = 10000~
-	
+		Jesse = 100~
+		SPILL(Jesse)~
 	}
 	SOBER
 	{
-		Jess = 1000~
-		
+		Jesse = 1000~
+		SPILL(Jesse)~
 	}
-	SPILL(Jess)~
+
+	CHUG
+	{
+		Jesse = Jesse + 1~
+		SPILL(Jesse)~
+	}
+	UNTIL (Jesse < 1006)~
+
+
+	
 STOP

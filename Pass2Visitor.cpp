@@ -235,7 +235,7 @@ antlrcpp::Any Pass2Visitor::visitCharacter_constant(MixedDrinksParser::Character
 }
 antlrcpp::Any Pass2Visitor::visitRepeat_statement(MixedDrinksParser::Repeat_statementContext *ctx)
 {
-	cout << "--> in While()" << endl;
+	cout << "--> in Repeat() " << ctx->getText() <<endl;
 
 	int loop_start=labelNum++;
 	j_file << "Label_" << loop_start << ":" << endl;
@@ -243,6 +243,7 @@ antlrcpp::Any Pass2Visitor::visitRepeat_statement(MixedDrinksParser::Repeat_stat
 	label=loop_start;
 	visit(ctx->expr()); //if the condition is still true go to loop start, else fall through
 	return NULL;
+
 }
 antlrcpp::Any Pass2Visitor::visitIf_stmt(MixedDrinksParser::If_stmtContext *ctx)
 {

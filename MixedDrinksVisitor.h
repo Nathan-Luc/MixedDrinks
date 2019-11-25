@@ -33,6 +33,8 @@ public:
 
     virtual antlrcpp::Any visitIf_stmt(MixedDrinksParser::If_stmtContext *context) = 0;
 
+    virtual antlrcpp::Any visitRepeat_statement(MixedDrinksParser::Repeat_statementContext *context) = 0;
+
     virtual antlrcpp::Any visitAssignment_stmt(MixedDrinksParser::Assignment_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitDeclaration_stmt(MixedDrinksParser::Declaration_stmtContext *context) = 0;
@@ -40,8 +42,6 @@ public:
     virtual antlrcpp::Any visitDeclaration(MixedDrinksParser::DeclarationContext *context) = 0;
 
     virtual antlrcpp::Any visitVariable_ID(MixedDrinksParser::Variable_IDContext *context) = 0;
-
-    virtual antlrcpp::Any visitRepeat_statement(MixedDrinksParser::Repeat_statementContext *context) = 0;
 
     virtual antlrcpp::Any visitStatement_list(MixedDrinksParser::Statement_listContext *context) = 0;
 

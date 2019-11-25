@@ -5,7 +5,7 @@ grammar MixedDrinks;
 using namespace wci::intermediate;
 }
 
-prog:   main block END ; 
+prog:   main block END; 
 
 main 	: typeID MIXED_DRINKS '(' ((typeID IDENTIFIER) ','?)* ')';
 
@@ -14,14 +14,15 @@ block	: statement_list ;
 stmt: 		(assignment_stmt '~')
 	|		(declaration_stmt '~')
 	|		if_stmt			
-	|		assignment_stmt 
 	| 		repeat_statement    		
-	|		declaration_stmt
 	|		print_statement
 	;
 
 /* CONDITIONAL STATEMENT */
 if_stmt         	: IF '(' expr ')' THEN '{' (statement_list '}'(ELSE '{' statement_list '}' )?) ;
+/* LOOP STATEMENT */
+repeat_statement     : REPEAT '{' statement_list '}' UNTIL '('expr ')' '~';
+
 
 /* Assignment and Declarations */
 assignment_stmt 	: drink '=' expr ;
@@ -30,8 +31,6 @@ declaration			: typeID variable_ID;
 
 variable_ID locals [ TypeSpec *type = nullptr ] : IDENTIFIER ;
 
-/* LOOP STATEMENT */
-repeat_statement     : REPEAT '{' statement_list '}' UNTIL expr '~';
 
 statement_list       : stmt+ ;
 

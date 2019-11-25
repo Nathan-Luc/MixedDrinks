@@ -36,11 +36,11 @@ run:
 wrun:
 	$(JAVACP) .;$(PASCALRTL) $(MIXEDDRINKS)
 
-program: compiler class run
+program: compile class run
 
-wprogram: compiler class wrun
+wprogram: compile class wrun
 
-compiler: 
+compile: 
 	 ./compiler $(SAMPLE)
 
 clean:

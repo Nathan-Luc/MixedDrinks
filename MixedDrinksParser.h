@@ -26,11 +26,11 @@ public:
 
   enum {
     RuleProg = 0, RuleMain = 1, RuleBlock = 2, RuleStmt = 3, RuleIf_stmt = 4, 
-    RuleAssignment_stmt = 5, RuleDeclaration_stmt = 6, RuleDeclaration = 7, 
-    RuleVariable_ID = 8, RuleRepeat_statement = 9, RuleStatement_list = 10, 
-    RulePrint_statement = 11, RuleOutput = 12, RuleIdentifiers = 13, RuleExpr = 14, 
-    RuleNumber = 15, RuleDrinkNames = 16, RuleTypeID = 17, RuleDrink = 18, 
-    RuleMul_div_op = 19, RuleAdd_sub_op = 20, RuleRel_op = 21
+    RuleRepeat_statement = 5, RuleAssignment_stmt = 6, RuleDeclaration_stmt = 7, 
+    RuleDeclaration = 8, RuleVariable_ID = 9, RuleStatement_list = 10, RulePrint_statement = 11, 
+    RuleOutput = 12, RuleIdentifiers = 13, RuleExpr = 14, RuleNumber = 15, 
+    RuleDrinkNames = 16, RuleTypeID = 17, RuleDrink = 18, RuleMul_div_op = 19, 
+    RuleAdd_sub_op = 20, RuleRel_op = 21
   };
 
   MixedDrinksParser(antlr4::TokenStream *input);
@@ -48,11 +48,11 @@ public:
   class BlockContext;
   class StmtContext;
   class If_stmtContext;
+  class Repeat_statementContext;
   class Assignment_stmtContext;
   class Declaration_stmtContext;
   class DeclarationContext;
   class Variable_IDContext;
-  class Repeat_statementContext;
   class Statement_listContext;
   class Print_statementContext;
   class OutputContext;
@@ -141,6 +141,21 @@ public:
 
   If_stmtContext* if_stmt();
 
+  class  Repeat_statementContext : public antlr4::ParserRuleContext {
+  public:
+    Repeat_statementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *REPEAT();
+    Statement_listContext *statement_list();
+    antlr4::tree::TerminalNode *UNTIL();
+    ExprContext *expr();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Repeat_statementContext* repeat_statement();
+
   class  Assignment_stmtContext : public antlr4::ParserRuleContext {
   public:
     Assignment_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -194,21 +209,6 @@ public:
   };
 
   Variable_IDContext* variable_ID();
-
-  class  Repeat_statementContext : public antlr4::ParserRuleContext {
-  public:
-    Repeat_statementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *REPEAT();
-    Statement_listContext *statement_list();
-    antlr4::tree::TerminalNode *UNTIL();
-    ExprContext *expr();
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  Repeat_statementContext* repeat_statement();
 
   class  Statement_listContext : public antlr4::ParserRuleContext {
   public:
