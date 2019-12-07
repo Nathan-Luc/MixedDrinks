@@ -5,7 +5,7 @@ grammar MixedDrinks;
 using namespace wci::intermediate;
 }
 
-prog:   function_list? main block END; 
+prog:   function_list? main block END ; 
 
 main 	: typeID MIXED_DRINKS '(' ((typeID IDENTIFIER) ','?)* ')';
 
@@ -13,7 +13,7 @@ block	: statement_list
 		| function_list 
 		;
 
-statement_list       : stmt+ ;
+statement_list       : (stmt | functions)+ ;
 
 stmt: 		(assignment_stmt '~')
 	|	(declaration_stmt '~')

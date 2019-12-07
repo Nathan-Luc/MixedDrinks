@@ -124,6 +124,8 @@ public:
     virtual size_t getRuleIndex() const override;
     std::vector<StmtContext *> stmt();
     StmtContext* stmt(size_t i);
+    std::vector<FunctionsContext *> functions();
+    FunctionsContext* functions(size_t i);
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    

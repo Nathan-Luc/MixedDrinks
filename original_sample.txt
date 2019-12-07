@@ -1,23 +1,12 @@
-
-SHOTS shout(){
-	SHOTS i = 0~
-	CHUG
-	{
-		SPILL("Shots ")~
-		i = i + 1~
-	}
-	UNTIL (3 > i)~
-	RETURN 0~
-}
-
-
 SHOTS MIXED_DRINKS ()
+
 	SHOTS Long = 8~
 	SHOTS Nicholas = 5~
 	
 	SPRITS char = 'a'~
 	
 	Long = Long + Nicholas~
+	SPILL (Nicholas)~
 	SPILL (Long)~
 
 	SHOTS Jesse = 1001~
@@ -26,7 +15,6 @@ SHOTS MIXED_DRINKS ()
 	DRUNK(Jesse = 1000)
 	DO
 	{
-		SPILL("IN DRUNK")~
 		Jesse = 100~
 		Nathan = Nathan +1~
 		SPILL(Jesse)~
@@ -34,13 +22,43 @@ SHOTS MIXED_DRINKS ()
 	}
 	SOBER
 	{
-		SPILL("IN SOBER")~
 		Jesse = 1000~
 		Nathan = Nathan - 1~
 		SPILL(Jesse)~
 		SPILL(Nathan)~
 	}
+
+	CHUG
+	{
+		Jesse = Jesse + 1~
+		Nathan = Nathan + 2~
+		SPILL(Jesse)~
+	}
+	UNTIL (1010 >= Jesse)~
+	SPILL(Nathan)~
+	SPILL("Shots Shots Shots")~
 	
-	shout()~
 STOP
+
+SHOTS shout(){
+	SHOTS i = 0~
+
+	CHUG{
+		SPILL("shots ")~
+		i = i + 1~
+	}
+	UNTIL(i < 3)~
+	
+	return 0~
+}
+
+
+SHOTS MIXED_DRINKS ()
+	SPILL("test")~
+
+	shout()~
+	
+	SPILL("second")~
+STOP
+
 
