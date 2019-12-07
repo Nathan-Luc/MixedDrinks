@@ -41,6 +41,11 @@ public:
 	antlrcpp::Any visitCharacter_constant(MixedDrinksParser::Character_constantContext *ctx) override;
 	antlrcpp::Any visitRelExpr(MixedDrinksParser::RelExprContext *ctx) override;
 	antlrcpp::Any visitInteger_constant(MixedDrinksParser::Integer_constantContext *ctx) override;
+	
+	antlrcpp::Any visitFunctionCallExpression(MixedDrinksParser::FunctionCallExpressionContext *context) override;
+	antlrcpp::Any visitFunction_ID(MixedDrinksParser::Function_IDContext *context) override;
+	antlrcpp::Any visitFunction_define(MixedDrinksParser::Function_defineContext *ctx) override;
+	
 };
 
 #endif /* PASS1VISITOR_H_ */

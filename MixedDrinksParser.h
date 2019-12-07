@@ -18,19 +18,21 @@ public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, MIXED_DRINKS = 7, 
     BEGIN = 8, END = 9, REPEAT = 10, UNTIL = 11, IF = 12, THEN = 13, ELSE = 14, 
-    INT = 15, CHAR = 16, PRINT = 17, IDENTIFIER = 18, INTEGER = 19, CHARACTER = 20, 
-    STRING = 21, MUL_OP = 22, DIV_OP = 23, ADD_OP = 24, SUB_OP = 25, EQ_OP = 26, 
-    NE_OP = 27, LT_OP = 28, LE_OP = 29, GT_OP = 30, GE_OP = 31, NEWLINE = 32, 
-    WS = 33
+    INT = 15, CHAR = 16, PRINT = 17, RETURN = 18, IDENTIFIER = 19, INTEGER = 20, 
+    CHARACTER = 21, STRING = 22, MUL_OP = 23, DIV_OP = 24, ADD_OP = 25, 
+    SUB_OP = 26, EQ_OP = 27, NE_OP = 28, LT_OP = 29, LE_OP = 30, GT_OP = 31, 
+    GE_OP = 32, NEWLINE = 33, WS = 34
   };
 
   enum {
-    RuleProg = 0, RuleMain = 1, RuleBlock = 2, RuleStmt = 3, RuleIf_stmt = 4, 
-    RuleRepeat_statement = 5, RuleAssignment_stmt = 6, RuleDeclaration_stmt = 7, 
-    RuleDeclaration = 8, RuleVariable_ID = 9, RuleStatement_list = 10, RulePrint_statement = 11, 
-    RuleOutput = 12, RuleIdentifiers = 13, RuleExpr = 14, RuleNumber = 15, 
-    RuleDrinkNames = 16, RuleTypeID = 17, RuleDrink = 18, RuleMul_div_op = 19, 
-    RuleAdd_sub_op = 20, RuleRel_op = 21
+    RuleProg = 0, RuleMain = 1, RuleBlock = 2, RuleStatement_list = 3, RuleStmt = 4, 
+    RuleFunction_list = 5, RuleFunctions = 6, RuleFunction_call = 7, RuleFunction_define = 8, 
+    RuleReturn_statement = 9, RuleIf_stmt = 10, RuleRepeat_statement = 11, 
+    RuleAssignment_stmt = 12, RuleDeclaration_stmt = 13, RuleDeclaration = 14, 
+    RuleVariable_ID = 15, RulePrint_statement = 16, RuleOutput = 17, RuleIdentifiers = 18, 
+    RuleExpr = 19, RuleNumber = 20, RuleDrinkNames = 21, RuleTypeID = 22, 
+    RuleDrink = 23, RuleFunction_ID = 24, RuleMul_div_op = 25, RuleAdd_sub_op = 26, 
+    RuleRel_op = 27
   };
 
   MixedDrinksParser(antlr4::TokenStream *input);
@@ -46,14 +48,19 @@ public:
   class ProgContext;
   class MainContext;
   class BlockContext;
+  class Statement_listContext;
   class StmtContext;
+  class Function_listContext;
+  class FunctionsContext;
+  class Function_callContext;
+  class Function_defineContext;
+  class Return_statementContext;
   class If_stmtContext;
   class Repeat_statementContext;
   class Assignment_stmtContext;
   class Declaration_stmtContext;
   class DeclarationContext;
   class Variable_IDContext;
-  class Statement_listContext;
   class Print_statementContext;
   class OutputContext;
   class IdentifiersContext;
@@ -62,6 +69,7 @@ public:
   class DrinkNamesContext;
   class TypeIDContext;
   class DrinkContext;
+  class Function_IDContext;
   class Mul_div_opContext;
   class Add_sub_opContext;
   class Rel_opContext; 
@@ -73,6 +81,7 @@ public:
     MainContext *main();
     BlockContext *block();
     antlr4::tree::TerminalNode *END();
+    Function_listContext *function_list();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
@@ -101,12 +110,26 @@ public:
     BlockContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Statement_listContext *statement_list();
+    Function_listContext *function_list();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
   };
 
   BlockContext* block();
+
+  class  Statement_listContext : public antlr4::ParserRuleContext {
+  public:
+    Statement_listContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<StmtContext *> stmt();
+    StmtContext* stmt(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Statement_listContext* statement_list();
 
   class  StmtContext : public antlr4::ParserRuleContext {
   public:
@@ -117,12 +140,81 @@ public:
     If_stmtContext *if_stmt();
     Repeat_statementContext *repeat_statement();
     Print_statementContext *print_statement();
+    Return_statementContext *return_statement();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
   };
 
   StmtContext* stmt();
+
+  class  Function_listContext : public antlr4::ParserRuleContext {
+  public:
+    Function_listContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<FunctionsContext *> functions();
+    FunctionsContext* functions(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Function_listContext* function_list();
+
+  class  FunctionsContext : public antlr4::ParserRuleContext {
+  public:
+    FunctionsContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    Function_callContext *function_call();
+    Function_defineContext *function_define();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  FunctionsContext* functions();
+
+  class  Function_callContext : public antlr4::ParserRuleContext {
+  public:
+    Function_callContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    Function_IDContext *function_ID();
+    IdentifiersContext *identifiers();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Function_callContext* function_call();
+
+  class  Function_defineContext : public antlr4::ParserRuleContext {
+  public:
+    Function_defineContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    TypeIDContext *typeID();
+    Function_IDContext *function_ID();
+    Statement_listContext *statement_list();
+    std::vector<DeclarationContext *> declaration();
+    DeclarationContext* declaration(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Function_defineContext* function_define();
+
+  class  Return_statementContext : public antlr4::ParserRuleContext {
+  public:
+    Return_statementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *RETURN();
+    ExprContext *expr();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Return_statementContext* return_statement();
 
   class  If_stmtContext : public antlr4::ParserRuleContext {
   public:
@@ -210,19 +302,6 @@ public:
 
   Variable_IDContext* variable_ID();
 
-  class  Statement_listContext : public antlr4::ParserRuleContext {
-  public:
-    Statement_listContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    std::vector<StmtContext *> stmt();
-    StmtContext* stmt(size_t i);
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  Statement_listContext* statement_list();
-
   class  Print_statementContext : public antlr4::ParserRuleContext {
   public:
     Print_statementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -307,6 +386,14 @@ public:
     NumberExpressionContext(ExprContext *ctx);
 
     NumberContext *number();
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  FunctionCallExpressionContext : public ExprContext {
+  public:
+    FunctionCallExpressionContext(ExprContext *ctx);
+
+    Function_callContext *function_call();
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
   };
 
@@ -402,6 +489,18 @@ public:
   };
 
   DrinkContext* drink();
+
+  class  Function_IDContext : public antlr4::ParserRuleContext {
+  public:
+    Function_IDContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *IDENTIFIER();
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Function_IDContext* function_ID();
 
   class  Mul_div_opContext : public antlr4::ParserRuleContext {
   public:

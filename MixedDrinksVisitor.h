@@ -29,7 +29,19 @@ public:
 
     virtual antlrcpp::Any visitBlock(MixedDrinksParser::BlockContext *context) = 0;
 
+    virtual antlrcpp::Any visitStatement_list(MixedDrinksParser::Statement_listContext *context) = 0;
+
     virtual antlrcpp::Any visitStmt(MixedDrinksParser::StmtContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunction_list(MixedDrinksParser::Function_listContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunctions(MixedDrinksParser::FunctionsContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunction_call(MixedDrinksParser::Function_callContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunction_define(MixedDrinksParser::Function_defineContext *context) = 0;
+
+    virtual antlrcpp::Any visitReturn_statement(MixedDrinksParser::Return_statementContext *context) = 0;
 
     virtual antlrcpp::Any visitIf_stmt(MixedDrinksParser::If_stmtContext *context) = 0;
 
@@ -42,8 +54,6 @@ public:
     virtual antlrcpp::Any visitDeclaration(MixedDrinksParser::DeclarationContext *context) = 0;
 
     virtual antlrcpp::Any visitVariable_ID(MixedDrinksParser::Variable_IDContext *context) = 0;
-
-    virtual antlrcpp::Any visitStatement_list(MixedDrinksParser::Statement_listContext *context) = 0;
 
     virtual antlrcpp::Any visitPrint_statement(MixedDrinksParser::Print_statementContext *context) = 0;
 
@@ -59,6 +69,8 @@ public:
 
     virtual antlrcpp::Any visitNumberExpression(MixedDrinksParser::NumberExpressionContext *context) = 0;
 
+    virtual antlrcpp::Any visitFunctionCallExpression(MixedDrinksParser::FunctionCallExpressionContext *context) = 0;
+
     virtual antlrcpp::Any visitRelExpr(MixedDrinksParser::RelExprContext *context) = 0;
 
     virtual antlrcpp::Any visitMulDivExpr(MixedDrinksParser::MulDivExprContext *context) = 0;
@@ -72,6 +84,8 @@ public:
     virtual antlrcpp::Any visitTypeID(MixedDrinksParser::TypeIDContext *context) = 0;
 
     virtual antlrcpp::Any visitDrink(MixedDrinksParser::DrinkContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunction_ID(MixedDrinksParser::Function_IDContext *context) = 0;
 
     virtual antlrcpp::Any visitMul_div_op(MixedDrinksParser::Mul_div_opContext *context) = 0;
 

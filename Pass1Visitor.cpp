@@ -225,3 +225,77 @@ antlrcpp::Any Pass1Visitor::visitNumberExpression(MixedDrinksParser::NumberExpre
     ctx->type = ctx->number()->type;
     return value;
 }
+
+antlrcpp::Any Pass1Visitor::visitFunctionCallExpression(MixedDrinksParser::FunctionCallExpressionContext *context)
+{
+    cout << "--> in FuncCallExpr(): " + context->getText() << endl;
+    string func_name = context->function_call()->function_ID()->getText();
+    string munchies_func = func_name;
+    SymTabEntry *function_id = symtab_stack->lookup(func_name);
+    context->type = function_id->get_typespec();
+    func_name = func_name + ".munch";
+
+
+    cout << "--> returning visitFuncCall() " << munchies_func << endl;
+    return visitChildren(context);
+}
+
+antlrcpp::Any Pass1Visitor::visitFunction_ID(MixedDrinksParser::Function_IDContext *context)
+{
+    string func_name = context->IDENTIFIER()->toString();
+    SymTabEntry *function_id = symtab_stack->enter_local(func_name);
+    function_id->set_definition((Definition) DF_FUNCTION);
+    string return_name_str = context->getText();
+    variable_id_list.push_back(function_id);
+
+    return_name_str = "printing " + return_name_str;
+    cout << return_name_str;
+
+    return visitChildren(context);
+}
+
+antlrcpp::Any Pass1Visitor::visitFunction_define(MixedDrinksParser::Function_defineContext *ctx)
+{
+    cout << "--> in Fn_defn(): " + ctx->getText() << endl;
+    func_id = ctx->function_ID()->getText() + "_";
+    
+    variable_id_list.resize(0);
+    auto value = visit(ctx->function_ID());
+    visit(ctx->typeID());
+
+    TypeSpec *type;
+    string type_indicator;
+    string type_name = ctx->typeID()->getText();
+
+    if (type_name == "int")
+    {
+        type = Predefined::integer_type;
+        type_indicator = "I";
+    }
+    else if (type_name == "string")
+    {
+        type = Predefined::char_type;
+        type_indicator = "C";
+    }
+    else if (type_name == "char")
+    {
+        type = Predefined::char_type;
+        type_indicator = "C";
+    }
+    else
+    {
+        type = nullptr;
+        type_indicator = "?";
+    }
+    for (SymTabEntry *id : variable_id_list) 
+    {
+        id->set_typespec(type);
+    }
+    for (unsigned int i=0; i<ctx->declaration().size(); i++)
+    {
+    	visit(ctx->declaration(i));
+    }
+    visit(ctx->statement_list());
+    func_id = "";
+    return NULL;
+}

@@ -18,10 +18,10 @@ public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, MIXED_DRINKS = 7, 
     BEGIN = 8, END = 9, REPEAT = 10, UNTIL = 11, IF = 12, THEN = 13, ELSE = 14, 
-    INT = 15, CHAR = 16, PRINT = 17, IDENTIFIER = 18, INTEGER = 19, CHARACTER = 20, 
-    STRING = 21, MUL_OP = 22, DIV_OP = 23, ADD_OP = 24, SUB_OP = 25, EQ_OP = 26, 
-    NE_OP = 27, LT_OP = 28, LE_OP = 29, GT_OP = 30, GE_OP = 31, NEWLINE = 32, 
-    WS = 33
+    INT = 15, CHAR = 16, PRINT = 17, RETURN = 18, IDENTIFIER = 19, INTEGER = 20, 
+    CHARACTER = 21, STRING = 22, MUL_OP = 23, DIV_OP = 24, ADD_OP = 25, 
+    SUB_OP = 26, EQ_OP = 27, NE_OP = 28, LT_OP = 29, LE_OP = 30, GT_OP = 31, 
+    GE_OP = 32, NEWLINE = 33, WS = 34
   };
 
   MixedDrinksLexer(antlr4::CharStream *input);

@@ -4,9 +4,25 @@
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
 
+; SHOTSLong
+
+.field private static Long I
+
+; SHOTSNicholas
+
+.field private static Nicholas I
+
+; SPRITSchar
+
+.field private static char C
+
 ; SHOTSJesse
 
 .field private static Jesse I
+
+; SHOTSNathan
+
+.field private static Nathan I
 
 .method public <init>()V
 
@@ -29,12 +45,71 @@
 	invokenonvirtual PascalTextIn/<init>()V
 	putstatic        MixedDrinks/_standardIn LPascalTextIn;
 
+; SHOTSLong=8~
+
+	ldc	8
+	putstatic	MixedDrinks/Long I
+
+; SHOTSNicholas=5~
+
+	ldc	5
+	putstatic	MixedDrinks/Nicholas I
+
+; SPRITSchar='a'~
+
+	ldc	97
+	putstatic	MixedDrinks/char C
+
+; Long=Long+Nicholas~
+
+	getstatic	MixedDrinks/Long I
+	getstatic	MixedDrinks/Nicholas I
+	iadd
+	putstatic	MixedDrinks/Long I
+
+; SPILL(Nicholas)~<missing '~'>
+
+	getstatic	MixedDrinks/Nicholas I
+		putstatic	MixedDrinks/Nicholas I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Nicholas = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/Nicholas I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
+
+; SPILL(Long)~<missing '~'>
+
+	getstatic	MixedDrinks/Long I
+		putstatic	MixedDrinks/Long I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Long = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/Long I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
+
 ; SHOTSJesse=1001~
 
 	ldc	1001
 	putstatic	MixedDrinks/Jesse I
 
-; DRUNK(Jesse=1000)DO{Jesse=100~SPILL(Jesse)~}SOBER{Jesse=1000~SPILL(Jesse)~}
+; SHOTSNathan=1~
+
+	ldc	1
+	putstatic	MixedDrinks/Nathan I
+
+; DRUNK(Jesse=1000)DO{Jesse=100~Nathan=Nathan+1~SPILL(Jesse)~<missing '~'>SPILL(Nathan)~<missing '~'>}SOBER{Jesse=1000~Nathan=Nathan-1~SPILL(Jesse)~<missing '~'>SPILL(Nathan)~<missing '~'>}
 
 Label_0:
 	getstatic	MixedDrinks/Jesse I
@@ -46,7 +121,14 @@ Label_0:
 	ldc	1000
 	putstatic	MixedDrinks/Jesse I
 
-; SPILL(Jesse)~
+; Nathan=Nathan-1~
+
+	getstatic	MixedDrinks/Nathan I
+	ldc	1
+	isub
+	putstatic	MixedDrinks/Nathan I
+
+; SPILL(Jesse)~<missing '~'>
 
 	getstatic	MixedDrinks/Jesse I
 		putstatic	MixedDrinks/Jesse I
@@ -57,6 +139,22 @@ Label_0:
 		dup
 		iconst_0
 		getstatic	MixedDrinks/Jesse I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
+
+; SPILL(Nathan)~<missing '~'>
+
+	getstatic	MixedDrinks/Nathan I
+		putstatic	MixedDrinks/Nathan I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Nathan = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/Nathan I
 		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
 		aastore
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
@@ -69,7 +167,14 @@ Label_1:
 	ldc	100
 	putstatic	MixedDrinks/Jesse I
 
-; SPILL(Jesse)~
+; Nathan=Nathan+1~
+
+	getstatic	MixedDrinks/Nathan I
+	ldc	1
+	iadd
+	putstatic	MixedDrinks/Nathan I
+
+; SPILL(Jesse)~<missing '~'>
 
 	getstatic	MixedDrinks/Jesse I
 		putstatic	MixedDrinks/Jesse I
@@ -84,9 +189,25 @@ Label_1:
 		aastore
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
+
+; SPILL(Nathan)~<missing '~'>
+
+	getstatic	MixedDrinks/Nathan I
+		putstatic	MixedDrinks/Nathan I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Nathan = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/Nathan I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 Label_2:
 
-; CHUG{Jesse=Jesse+1~SPILL(Jesse)~}UNTIL(Jesse<1006)~
+; CHUG{Jesse=Jesse+1~Nathan=Nathan+2~SPILL(Jesse)~<missing '~'>}UNTIL(1010>=Jesse)~
 
 Label_3:
 
@@ -97,7 +218,14 @@ Label_3:
 	iadd
 	putstatic	MixedDrinks/Jesse I
 
-; SPILL(Jesse)~
+; Nathan=Nathan+2~
+
+	getstatic	MixedDrinks/Nathan I
+	ldc	2
+	iadd
+	putstatic	MixedDrinks/Nathan I
+
+; SPILL(Jesse)~<missing '~'>
 
 	getstatic	MixedDrinks/Jesse I
 		putstatic	MixedDrinks/Jesse I
@@ -112,9 +240,33 @@ Label_3:
 		aastore
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
+	ldc	1010
 	getstatic	MixedDrinks/Jesse I
-	ldc	1006
-	if_icmplt Label_3
+	if_icmpge Label_3
+
+; SPILL(Nathan)~<missing '~'>
+
+	getstatic	MixedDrinks/Nathan I
+		putstatic	MixedDrinks/Nathan I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Nathan = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/Nathan I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
+
+; SPILL("Shots Shots Shots")~<missing '~'>
+
+	; Assignment
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Shots Shots Shots"
+
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 
 	getstatic     MixedDrinks/_runTimer LRunTimer;
 	invokevirtual RunTimer.printElapsedTime()V

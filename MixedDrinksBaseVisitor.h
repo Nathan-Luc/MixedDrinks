@@ -31,7 +31,31 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitStatement_list(MixedDrinksParser::Statement_listContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitStmt(MixedDrinksParser::StmtContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunction_list(MixedDrinksParser::Function_listContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunctions(MixedDrinksParser::FunctionsContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunction_call(MixedDrinksParser::Function_callContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunction_define(MixedDrinksParser::Function_defineContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitReturn_statement(MixedDrinksParser::Return_statementContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -56,10 +80,6 @@ public:
   }
 
   virtual antlrcpp::Any visitVariable_ID(MixedDrinksParser::Variable_IDContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitStatement_list(MixedDrinksParser::Statement_listContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -91,6 +111,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitFunctionCallExpression(MixedDrinksParser::FunctionCallExpressionContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitRelExpr(MixedDrinksParser::RelExprContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -116,6 +140,10 @@ public:
   }
 
   virtual antlrcpp::Any visitDrink(MixedDrinksParser::DrinkContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunction_ID(MixedDrinksParser::Function_IDContext *ctx) override {
     return visitChildren(ctx);
   }
 

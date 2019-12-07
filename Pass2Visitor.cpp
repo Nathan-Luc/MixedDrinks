@@ -317,3 +317,73 @@ antlrcpp::Any Pass2Visitor::visitRelExpr(MixedDrinksParser::RelExprContext *ctx)
     j_file << "\t" << jas_op << " Label_" << label << endl;
     return NULL;
 }
+
+antlrcpp::Any Pass2Visitor::visitFunction_define(MixedDrinksParser::Function_defineContext *context)
+{
+	 cout << "--> in FuncDef(): " << context->function_ID()->getText() << endl;
+	 fxn_name = context->function_ID()->getText() + "_";
+	 vector<vector<string>> fxn_inputs;
+
+	 j_file << "\tgoto " << fxn_name << "end" << endl;
+	 j_file << context->function_ID()->getText() << ":" << endl;
+	 j_file << "\tastore_1" << endl;
+
+	 if(context->declaration(0) != NULL)
+	 {
+		 for(unsigned int i = 0; i < context->declaration().size(); i++)
+		 {
+			 string type_name     = context->declaration(i)->children[0]->getText();
+			 string var_name = context->declaration(i)->children[1]->getText();
+			 fxn_inputs.push_back({fxn_name + var_name, type_name});
+		 }
+	 }
+	 fxn_variables_vec.emplace(context->function_ID()->IDENTIFIER()->getText(), fxn_inputs);
+
+	 auto value = visitChildren(context->statement_list());
+	 j_file << "\tret 1" << endl;
+	 j_file << fxn_name << "end:" << endl;
+	 fxn_name = "";
+	 return value;
+ }
+antlrcpp::Any Pass2Visitor::visitFunction_call(MixedDrinksParser::Function_callContext *context)
+{
+	cout<<"--> in FuncCall()" << endl;
+	if(context->identifiers() != NULL)
+	{
+		int input_count = context->identifiers()->expr().size();
+		vector<vector<string>> fxn_inputs = fxn_variables_vec.find(context->function_ID()->getText())->second;
+		int input_num = fxn_inputs.size();
+
+		int total = 0;
+		if (input_num > input_count)
+		{
+			total = input_count;
+		}
+		else
+		{
+			total = input_num;
+		}
+		for(int i = 0; i < total; i++)
+		{
+			string var_name  = fxn_inputs[i][0];
+			string type_name = fxn_inputs[i][1];
+
+			visit(context->identifiers()->expr(i));
+
+			string type_indicator =
+				  (type_name == "int")     ? "I"
+				: (type_name == "string")  ? "C"
+				:                            "?";
+			// Emit a field put instruction.
+			j_file << "\tputstatic\t" << program_name << "/" << fxn_name <<  var_name << " " << type_indicator << endl;
+		}
+	}
+	j_file << "\tjsr " << context->function_ID()->getText() << endl;
+	return NULL;
+}
+antlrcpp::Any Pass2Visitor::visitReturn_statement(MixedDrinksParser::Return_statementContext *context)
+{
+	cout<<"--> in return()"<<endl;
+	visit(context->expr());
+	return NULL;
+}
