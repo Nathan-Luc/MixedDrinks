@@ -21,18 +21,18 @@ public:
     INT = 15, CHAR = 16, PRINT = 17, RETURN = 18, IDENTIFIER = 19, INTEGER = 20, 
     CHARACTER = 21, STRING = 22, MUL_OP = 23, DIV_OP = 24, ADD_OP = 25, 
     SUB_OP = 26, EQ_OP = 27, NE_OP = 28, LT_OP = 29, LE_OP = 30, GT_OP = 31, 
-    GE_OP = 32, NEWLINE = 33, WS = 34
+    GE_OP = 32, NEWLINE = 33, WS = 34, STOP = 35
   };
 
   enum {
     RuleProg = 0, RuleMain = 1, RuleBlock = 2, RuleStatement_list = 3, RuleStmt = 4, 
-    RuleFunction_list = 5, RuleFunctions = 6, RuleFunction_call = 7, RuleFunction_define = 8, 
-    RuleReturn_statement = 9, RuleIf_stmt = 10, RuleRepeat_statement = 11, 
-    RuleAssignment_stmt = 12, RuleDeclaration_stmt = 13, RuleDeclaration = 14, 
-    RuleVariable_ID = 15, RulePrint_statement = 16, RuleOutput = 17, RuleIdentifiers = 18, 
-    RuleExpr = 19, RuleNumber = 20, RuleDrinkNames = 21, RuleTypeID = 22, 
-    RuleDrink = 23, RuleFunction_ID = 24, RuleMul_div_op = 25, RuleAdd_sub_op = 26, 
-    RuleRel_op = 27
+    RuleFunction_list = 5, RuleFunction_declaration = 6, RuleFunctions = 7, 
+    RuleFunction_call = 8, RuleFunction_define = 9, RuleReturn_statement = 10, 
+    RuleIf_stmt = 11, RuleRepeat_statement = 12, RuleAssignment_stmt = 13, 
+    RuleDeclaration_stmt = 14, RuleDeclaration = 15, RuleVariable_ID = 16, 
+    RulePrint_statement = 17, RuleOutput = 18, RuleIdentifiers = 19, RuleExpr = 20, 
+    RuleNumber = 21, RuleDrinkNames = 22, RuleTypeID = 23, RuleDrink = 24, 
+    RuleFunction_ID = 25, RuleMul_div_op = 26, RuleAdd_sub_op = 27, RuleRel_op = 28
   };
 
   MixedDrinksParser(antlr4::TokenStream *input);
@@ -51,6 +51,7 @@ public:
   class Statement_listContext;
   class StmtContext;
   class Function_listContext;
+  class Function_declarationContext;
   class FunctionsContext;
   class Function_callContext;
   class Function_defineContext;
@@ -162,6 +163,24 @@ public:
   };
 
   Function_listContext* function_list();
+
+  class  Function_declarationContext : public antlr4::ParserRuleContext {
+  public:
+    Function_declarationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<DrinkContext *> drink();
+    DrinkContext* drink(size_t i);
+    Function_IDContext *function_ID();
+    StmtContext *stmt();
+    antlr4::tree::TerminalNode *STOP();
+    std::vector<antlr4::tree::TerminalNode *> IDENTIFIER();
+    antlr4::tree::TerminalNode* IDENTIFIER(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Function_declarationContext* function_declaration();
 
   class  FunctionsContext : public antlr4::ParserRuleContext {
   public:

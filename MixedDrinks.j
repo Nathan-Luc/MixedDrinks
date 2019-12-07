@@ -4,9 +4,9 @@
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
 
-; SHOTStest
+; SHOTSt
 
-.field private static shout_test I
+.field private static shout_t I
 
 ; SHOTSi
 
@@ -19,6 +19,10 @@
 ; SHOTSNicholas
 
 .field private static Nicholas I
+
+; SHOTSMac
+
+.field private static Mac I
 
 ; SPRITSchar
 
@@ -61,7 +65,7 @@ shout:
 	ldc	0
 	putstatic	MixedDrinks/shout_i I
 
-; CHUG{SPILL("Shots ")~~i=i+1~}UNTIL(3>i)~
+; CHUG{SPILL("Shots ")~~i=i+1~t=t+i~}UNTIL(3>i)~
 
 Label_0:
 
@@ -79,29 +83,36 @@ Label_0:
 	ldc	1
 	iadd
 	putstatic	MixedDrinks/shout_i I
+
+; t=t+i~
+
+	getstatic	MixedDrinks/shout_t I
+	getstatic	MixedDrinks/shout_i I
+	iadd
+	putstatic	MixedDrinks/shout_t I
 	ldc	3
 	getstatic	MixedDrinks/shout_i I
 	if_icmpgt Label_0
 
-; SPILL(test)~~
+; SPILL(t)~~
 
-	getstatic	MixedDrinks/shout_test I
-		putstatic	MixedDrinks/shout_test I
+	getstatic	MixedDrinks/shout_t I
+		putstatic	MixedDrinks/shout_t I
 		getstatic	java/lang/System/out Ljava/io/PrintStream;
-		ldc "shout_test = %d\n"
+		ldc "shout_t = %d\n"
 		iconst_1	
 		anewarray	java/lang/Object
 		dup
 		iconst_0
-		getstatic	MixedDrinks/shout_test I
+		getstatic	MixedDrinks/shout_t I
 		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
 		aastore
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 
-; RETURN0~
+; RETURNt~
 
-	ldc	0
+	getstatic	MixedDrinks/shout_t I
 	ret 1
 shout_end:
 
@@ -114,6 +125,11 @@ shout_end:
 
 	ldc	5
 	putstatic	MixedDrinks/Nicholas I
+
+; SHOTSMac=20~
+
+	ldc	20
+	putstatic	MixedDrinks/Mac I
 
 ; SPRITSchar='a'~
 
@@ -266,9 +282,45 @@ Label_2:
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 Label_3:
+
+; SPILL(Long)~~
+
 	getstatic	MixedDrinks/Long I
-	putstatic	MixedDrinks/shout_test I
+		putstatic	MixedDrinks/Long I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Long = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/Long I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
+
+; Long=shout(Mac)~
+
+	getstatic	MixedDrinks/Mac I
+	putstatic	MixedDrinks/shout_t I
 	jsr shout
+	putstatic	MixedDrinks/Long I
+
+; SPILL(Long)~~
+
+	getstatic	MixedDrinks/Long I
+		putstatic	MixedDrinks/Long I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "Long = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/Long I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 
 	getstatic     MixedDrinks/_runTimer LRunTimer;
 	invokevirtual RunTimer.printElapsedTime()V

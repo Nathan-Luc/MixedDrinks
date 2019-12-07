@@ -32,6 +32,7 @@ GT_OP=31
 GE_OP=32
 NEWLINE=33
 WS=34
+STOP=35
 '('=1
 ','=2
 ')'=3

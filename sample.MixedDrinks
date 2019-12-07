@@ -1,20 +1,22 @@
 
-SHOTS shout(SHOTS test){
+SHOTS shout(SHOTS t){
 	SHOTS i = 0~
 	CHUG
 	{
 		SPILL("Shots ")~~
 		i = i + 1~
+		t = t + i~
 	}
 	UNTIL (3 > i)~
-	SPILL(test)~~
-	RETURN 0~
+	SPILL (t)~~
+	RETURN t~
 }
 
 
 SHOTS MIXED_DRINKS ()
 	SHOTS Long = 8~
 	SHOTS Nicholas = 5~
+	SHOTS Mac = 20~
 	
 	SPRITS char = 'a'~
 	
@@ -41,7 +43,9 @@ SHOTS MIXED_DRINKS ()
 		SPILL(Jesse)~~
 		SPILL(Nathan)~~
 	}
-	
-	shout(Long )~
+
+	SPILL (Long)~~
+	Long = shout(Mac )~
+	SPILL (Long)~~
 STOP
 

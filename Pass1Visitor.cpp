@@ -267,17 +267,17 @@ antlrcpp::Any Pass1Visitor::visitFunction_define(MixedDrinksParser::Function_def
     string type_indicator;
     string type_name = ctx->typeID()->getText();
 
-    if (type_name == "int")
+    if (type_name == "SHOTS")
     {
         type = Predefined::integer_type;
         type_indicator = "I";
     }
-    else if (type_name == "string")
-    {
-        type = Predefined::char_type;
-        type_indicator = "C";
-    }
-    else if (type_name == "char")
+    // else if (type_name == "string")
+    // {
+    //     type = Predefined::char_type;
+    //     type_indicator = "C";
+    // }
+    else if (type_name == "SPRITS")
     {
         type = Predefined::char_type;
         type_indicator = "C";

@@ -35,6 +35,8 @@ public:
 
     virtual antlrcpp::Any visitFunction_list(MixedDrinksParser::Function_listContext *context) = 0;
 
+    virtual antlrcpp::Any visitFunction_declaration(MixedDrinksParser::Function_declarationContext *context) = 0;
+
     virtual antlrcpp::Any visitFunctions(MixedDrinksParser::FunctionsContext *context) = 0;
 
     virtual antlrcpp::Any visitFunction_call(MixedDrinksParser::Function_callContext *context) = 0;

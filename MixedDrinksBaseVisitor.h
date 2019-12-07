@@ -43,6 +43,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitFunction_declaration(MixedDrinksParser::Function_declarationContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitFunctions(MixedDrinksParser::FunctionsContext *ctx) override {
     return visitChildren(ctx);
   }

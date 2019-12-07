@@ -25,6 +25,7 @@ stmt: 		(assignment_stmt '~')
 
 /* FUNCTIONS */
 function_list	:	(functions)* ;
+function_declaration : drink function_ID'('((drink IDENTIFIER) ','+)* ')' stmt STOP;
 functions : function_call | function_define ;
 function_call : function_ID '(' identifiers? ')' '~'? ;
 function_define : typeID function_ID '(' ((declaration) ','?)* ')' '{' statement_list '}';
