@@ -4,6 +4,10 @@
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
 
+; SHOTStest
+
+.field private static shout_test I
+
 ; SHOTSi
 
 .field private static shout_i I
@@ -57,11 +61,11 @@ shout:
 	ldc	0
 	putstatic	MixedDrinks/shout_i I
 
-; CHUG{SPILL("Shots ")~<missing '~'>i=i+1~}UNTIL(3>i)~
+; CHUG{SPILL("Shots ")~~i=i+1~}UNTIL(3>i)~
 
 Label_0:
 
-; SPILL("Shots ")~<missing '~'>
+; SPILL("Shots ")~~
 
 	; Assignment
 		getstatic	java/lang/System/out Ljava/io/PrintStream;
@@ -78,6 +82,22 @@ Label_0:
 	ldc	3
 	getstatic	MixedDrinks/shout_i I
 	if_icmpgt Label_0
+
+; SPILL(test)~~
+
+	getstatic	MixedDrinks/shout_test I
+		putstatic	MixedDrinks/shout_test I
+		getstatic	java/lang/System/out Ljava/io/PrintStream;
+		ldc "shout_test = %d\n"
+		iconst_1	
+		anewarray	java/lang/Object
+		dup
+		iconst_0
+		getstatic	MixedDrinks/shout_test I
+		invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+		aastore
+		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 
 ; RETURN0~
 
@@ -107,7 +127,7 @@ shout_end:
 	iadd
 	putstatic	MixedDrinks/Long I
 
-; SPILL(Long)~<missing '~'>
+; SPILL(Long)~~
 
 	getstatic	MixedDrinks/Long I
 		putstatic	MixedDrinks/Long I
@@ -133,14 +153,14 @@ shout_end:
 	ldc	1
 	putstatic	MixedDrinks/Nathan I
 
-; DRUNK(Jesse=1000)DO{SPILL("IN DRUNK")~<missing '~'>Jesse=100~Nathan=Nathan+1~SPILL(Jesse)~<missing '~'>SPILL(Nathan)~<missing '~'>}SOBER{SPILL("IN SOBER")~<missing '~'>Jesse=1000~Nathan=Nathan-1~SPILL(Jesse)~<missing '~'>SPILL(Nathan)~<missing '~'>}
+; DRUNK(Jesse=1000)DO{SPILL("IN DRUNK")~~Jesse=100~Nathan=Nathan+1~SPILL(Jesse)~~SPILL(Nathan)~~}SOBER{SPILL("IN SOBER")~~Jesse=1000~Nathan=Nathan-1~SPILL(Jesse)~~SPILL(Nathan)~~}
 
 Label_1:
 	getstatic	MixedDrinks/Jesse I
 	ldc	1000
 	if_icmpeq Label_2
 
-; SPILL("IN SOBER")~<missing '~'>
+; SPILL("IN SOBER")~~
 
 	; Assignment
 		getstatic	java/lang/System/out Ljava/io/PrintStream;
@@ -160,7 +180,7 @@ Label_1:
 	isub
 	putstatic	MixedDrinks/Nathan I
 
-; SPILL(Jesse)~<missing '~'>
+; SPILL(Jesse)~~
 
 	getstatic	MixedDrinks/Jesse I
 		putstatic	MixedDrinks/Jesse I
@@ -176,7 +196,7 @@ Label_1:
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 
-; SPILL(Nathan)~<missing '~'>
+; SPILL(Nathan)~~
 
 	getstatic	MixedDrinks/Nathan I
 		putstatic	MixedDrinks/Nathan I
@@ -194,7 +214,7 @@ Label_1:
 	goto Label_3
 Label_2:
 
-; SPILL("IN DRUNK")~<missing '~'>
+; SPILL("IN DRUNK")~~
 
 	; Assignment
 		getstatic	java/lang/System/out Ljava/io/PrintStream;
@@ -214,7 +234,7 @@ Label_2:
 	iadd
 	putstatic	MixedDrinks/Nathan I
 
-; SPILL(Jesse)~<missing '~'>
+; SPILL(Jesse)~~
 
 	getstatic	MixedDrinks/Jesse I
 		putstatic	MixedDrinks/Jesse I
@@ -230,7 +250,7 @@ Label_2:
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 
-; SPILL(Nathan)~<missing '~'>
+; SPILL(Nathan)~~
 
 	getstatic	MixedDrinks/Nathan I
 		putstatic	MixedDrinks/Nathan I
@@ -246,6 +266,8 @@ Label_2:
 		invokestatic  java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 		invokevirtual java/io/PrintStream.print(Ljava/lang/String;)V
 Label_3:
+	getstatic	MixedDrinks/Long I
+	putstatic	MixedDrinks/shout_test I
 	jsr shout
 
 	getstatic     MixedDrinks/_runTimer LRunTimer;

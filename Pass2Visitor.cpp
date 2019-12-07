@@ -371,8 +371,8 @@ antlrcpp::Any Pass2Visitor::visitFunction_call(MixedDrinksParser::Function_callC
 			visit(context->identifiers()->expr(i));
 
 			string type_indicator =
-				  (type_name == "int")     ? "I"
-				: (type_name == "string")  ? "C"
+				  (type_name == "SHOTS")     ? "I"
+				: (type_name == "SPRITS")  	 ? "C"
 				:                            "?";
 			// Emit a field put instruction.
 			j_file << "\tputstatic\t" << program_name << "/" << fxn_name <<  var_name << " " << type_indicator << endl;
