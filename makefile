@@ -5,7 +5,7 @@ JAVACP = java -cp
 JASMIN = jasmin-2.4/jasmin.jar
 PASCALRTL = PascalRTL.jar
 MIXEDDRINKS = MixedDrinks
-SAMPLE = sample.MixedDrinks
+SAMPLE = error_sample.MixedDrinks
 NOT = ! -name
 
 

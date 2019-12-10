@@ -17,10 +17,10 @@ statement_list       : (stmt | functions)+ ;
 
 stmt: 		(assignment_stmt '~')
 	|	(declaration_stmt '~')
-	|	if_stmt			
-	|	repeat_statement    		
+	|	(if_stmt '~')			
+	|	(repeat_statement '~') 		
 	|	(print_statement '~')
-	|	return_statement
+	|	(return_statement '~')
 	;
 
 /* FUNCTIONS */
@@ -28,13 +28,13 @@ function_list	:	(functions)* ;
 functions : function_call | function_define ;
 function_call : function_ID '(' identifiers? ')' '~'? ;
 function_define : typeID function_ID '(' ((declaration) ','?)* ')' '{' statement_list '}';
-return_statement : RETURN expr '~' ;
+return_statement : RETURN expr ;
 
 /* CONDITIONAL STATEMENT */
 if_stmt		: IF '(' expr ')' THEN '{' (statement_list '}'(ELSE '{' statement_list '}' )?) ;
 
 /* LOOP STATEMENT */
-repeat_statement     : REPEAT '{' statement_list '}' UNTIL '('expr ')' '~';
+repeat_statement     : REPEAT '{' statement_list '}' UNTIL '('expr ')';
 
 
 /* Assignment  */
@@ -45,7 +45,7 @@ declaration			: typeID variable_ID;
 
 variable_ID locals [ TypeSpec *type = nullptr ] : IDENTIFIER ;
 
-print_statement : PRINT '(' output ')' '~' ;
+print_statement : PRINT '(' output ')' ;
 output : expr | drinkNames ;
 
 identifiers : expr (',' expr)* ;

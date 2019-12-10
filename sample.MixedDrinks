@@ -1,46 +1,54 @@
-
-SHOTS shout(){
-	SHOTS i = 0~
-	CHUG
-	{
-		SPILL("Shots ")~
-		i = i + 1~
-	}
-	UNTIL (3 > i)~
-	RETURN 0~
+SHOTS shout(SHOTS test){
+    SHOTS i = 0~
+    CHUG
+    {
+        SPILL("Shots ")~
+        i = i + 1~
+    }
+    UNTIL (3 > i)~
+	
+	SPILL(test)~
+	
+    test = test+5*3~
+	
+	SPILL(test)~
+    RETURN test~
 }
 
 
 SHOTS MIXED_DRINKS ()
-	SHOTS Long = 8~
-	SHOTS Nicholas = 5~
-	
-	SPRITS char = 'a'~
-	
-	Long = Long + Nicholas~
-	SPILL (Long)~
+    SHOTS Long = 8~
+    SHOTS Nicholas = 5~
 
-	SHOTS Jesse = 1001~
-	SHOTS Nathan = 1~
+    SPRITS char = 'a'~
 
-	DRUNK(Jesse = 1000)
-	DO
-	{
-		SPILL("IN DRUNK")~
-		Jesse = 100~
-		Nathan = Nathan +1~
-		SPILL(Jesse)~
-		SPILL(Nathan)~
-	}
-	SOBER
-	{
-		SPILL("IN SOBER")~
-		Jesse = 1000~
-		Nathan = Nathan - 1~
-		SPILL(Jesse)~
-		SPILL(Nathan)~
-	}
+    Long = Long + Nicholas~
+    SPILL (Long)~
+
+    SHOTS Jesse = 1001~
+    SHOTS Nathan = 1~
+
+    DRUNK(Jesse == 1000)
+    DO
+    {
+        SPILL("IN DRUNK")~
+        Jesse = 100~
+        Nathan = Nathan +1~
+        SPILL(Jesse)~
+        SPILL(Nathan)~
+    }
+    SOBER
+    {
+        SPILL("IN SOBER")~
+        Jesse = 1000~
+        Nathan = Nathan - 1~
+        SPILL(Jesse)~
+        SPILL(Nathan)~
+    }
 	
-	shout()~
+    shout(Long)~
+	SPILL(Long)~
+	
+	Long = shout(Long)~
+	SPILL(Long)~
 STOP
-

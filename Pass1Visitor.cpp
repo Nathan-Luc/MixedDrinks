@@ -230,13 +230,13 @@ antlrcpp::Any Pass1Visitor::visitFunctionCallExpression(MixedDrinksParser::Funct
 {
     cout << "--> in FuncCallExpr(): " + context->getText() << endl;
     string func_name = context->function_call()->function_ID()->getText();
-    string munchies_func = func_name;
+    string mixed_drink_func = func_name;
     SymTabEntry *function_id = symtab_stack->lookup(func_name);
     context->type = function_id->get_typespec();
-    func_name = func_name + ".munch";
+    func_name = func_name + ".mixed";
 
 
-    cout << "--> returning visitFuncCall() " << munchies_func << endl;
+    cout << "--> returning visitFuncCall() " << mixed_drink_func << endl;
     return visitChildren(context);
 }
 
